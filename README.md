@@ -13,7 +13,7 @@ It is organised as follows.
             - sweep-singer.trees        *Supplementary Figure 1; SINGER produces multiple posterior sampled trees; one is uploaded here*
             - 1000G-chr20q-tsinfer.trees  *Supplementary Figure 2 (Panel B), Supplementary Figure 3*
         - simulated_ARGs *Simulated ARGs converted to input formats for various inference software; reproducible with code*
-            - sweep-simulated.trees     *Simulated ARGs in tskit format discussed in Fig 2
+            - sweep-simulated.trees     *Simulated ARGs in tskit format discussed in Fig 2*
             - 1000G-like-OOA-simulated.trees  *stdpopsim ARGs discussed in Supplementary Figure 2 (Panel A)*
     - manuscript
         - figures *Copies of high-resolution figures used in the manuscript*
