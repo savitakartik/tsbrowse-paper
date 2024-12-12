@@ -107,7 +107,33 @@ sizes.\\ \textbf{Availability:}\\ Python package:
 }
 
 \keywords{Ancestral Recombination Graphs, Holoviz, biobank-scale ARG
-visualisation, genome browser} \maketitle \section{Introduction} Visualisation
+visualisation, genome browser} \maketitle 
+
+\section{Introduction} 
+Ancestral recombination graphs (ARGs) describe how a set of sample
+sequences relate to each other at each position along the genome in a recombining
+species, and are currently the subject of intense research 
+interest~\citep{brandt2024promise,lewanski2024era,nielsen2024inference,
+wong2024general}. ARGs are a fundamental object in population genetics,
+and although they have been of theoretical interest for
+decades~\citep{Hudson1983,Griffiths1997} it is only with recent breakthroughs
+in inference methods~\citep{rasmussen2014genome,
+speidel2019method,kelleher2019inferring,wohns2022unified,zhang2023biobank,
+gunnarsson2024scalable,deng2024robust} that practical application has 
+become possible. Applications to varied questions such as the spatial 
+location of genetic
+ancestors~\citep{osmond2024estimating,deraje2024inferring,grundler2024geographic},
+
+as well as the use of ARGs as training data for machine learning 
+methods~\citep{whitehouse2024tree} depend critically on the \emph{accuracy}
+of the inferred ARGs. Yet, despite this explosion of downstream methods using
+inferred ARGs, there is a critical lack of practical tools to help
+researchers make informed assesments about the quality of their inferred ARGs.
+
+% Varied applications to
+% simulation~\citep{kelleher2016efficient,baumdicker2021efficient,Anderson-Trocme2023}
+
+Visualisation
 is an essential component of data analysis pipelines. In the past few decades,
 genome browsers have become synonymous with sequence visualisation, by
 providing user-friendly, interactive interfaces to navigate genomic sequences
@@ -120,32 +146,24 @@ The data security and scalability offered by this architecture ensures that
 genome browsers continue to be relevant in the biobank era.
 
 
-Ancestral recombination graphs (ARGs) describe how a set of sampled sequences 
-are related to each other at each position of the genome in a recombining
-species~\citep{brandt2024promise,lewanski2024era,nielsen2024inference,
-wong2024general}, and there has been significant recent progress 
-on inference through a range of approaches~\citep{rasmussen2014genome,
-speidel2019method,kelleher2019inferring,zhang2023biobank,gunnarsson2024scalable,
-deng2024robust}.
-
-Biobank-driven research has accelerated the development of several
-technologies, including the ability to infer Ancestral Recombination Graphs
-(ARGs) from large-scale genetic data
-% \citep{Kelleher2019,Speidel2019,Zhang2023,Gunnarsson2024.08.31.610248,Deng2024.03.16.585351}.
-ARGs encode the interwoven paths of genetic inheritance resulting from
-recombination, and can be represented as genetic genealogies along the sequence
-\citep{wong2024general,Hudson1983,Griffiths1997}. They capture rich detail about
-ancestral processes influencing the samples, and have garnered great interest
-in several applications in population and statistical genetics. These include
-the detection of ultra-rare genetic variation \citep{zhang2023biobank}, the mapping of
-quantitative trait loci \citep{Link2023}, and the sparse and efficient modeling
-of linkage disequilibrium \citep{Nowbandegani2023}. It is evident that ARG
-inference is increasingly becoming a part of genetic data analysis pipelines.
-Yet, ARG visualisation, which is crucial for downstream analyses remains
-challenging due to the complexity of inferences from empirical data. Existing
-visualisation tools (see \hyperref[sec:Discussion]{Discussion}) focus on the
-semantic representation of ARGs, but such representations have limited utility
-in informing downstream analyses. 
+% Biobank-driven research has accelerated the development of several
+% technologies, including the ability to infer Ancestral Recombination Graphs
+% (ARGs) from large-scale genetic data
+% % \citep{Kelleher2019,Speidel2019,Zhang2023,Gunnarsson2024.08.31.610248,Deng2024.03.16.585351}.
+% ARGs encode the interwoven paths of genetic inheritance resulting from
+% recombination, and can be represented as genetic genealogies along the sequence
+% \citep{wong2024general,Hudson1983,Griffiths1997}. They capture rich detail about
+% ancestral processes influencing the samples, and have garnered great interest
+% in several applications in population and statistical genetics. These include
+% the detection of ultra-rare genetic variation \citep{zhang2023biobank}, the mapping of
+% quantitative trait loci \citep{Link2023}, and the sparse and efficient modeling
+% of linkage disequilibrium \citep{Nowbandegani2023}. It is evident that ARG
+% inference is increasingly becoming a part of genetic data analysis pipelines.
+% Yet, ARG visualisation, which is crucial for downstream analyses remains
+% challenging due to the complexity of inferences from empirical data. Existing
+% visualisation tools (see \hyperref[sec:Discussion]{Discussion}) focus on the
+% semantic representation of ARGs, but such representations have limited utility
+% in informing downstream analyses. 
 
 To address this gap, we have developed \texttt{tsbrowse}, an open-source app
 intended as a genome browser for ARGs. Its  focus is on visualising the
