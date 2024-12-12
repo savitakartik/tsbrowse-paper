@@ -1,7 +1,7 @@
 
 all: paper.pdf
 
-paper.pdf: paper.tex paper.bib ${DATA} ${FIGURES} ${ILLUSTRATIONS}
+paper.pdf: paper.tex reference.bib
 	pdflatex -shell-escape paper.tex
 	bibtex paper
 	pdflatex paper.tex
