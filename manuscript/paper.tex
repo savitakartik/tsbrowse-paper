@@ -119,16 +119,25 @@ datasets from a URL or local file system \citep{IGV-web,Lee2013,Robinson2023}.
 The data security and scalability offered by this architecture ensures that
 genome browsers continue to be relevant in the biobank era.
 
+
+Ancestral recombination graphs (ARGs) describe how a set of sampled sequences 
+are related to each other at each position of the genome in a recombining
+species~\citep{brandt2024promise,lewanski2024era,nielsen2024inference,
+wong2024general}, and there has been significant recent progress 
+on inference through a range of approaches~\citep{rasmussen2014genome,
+speidel2019method,kelleher2019inferring,zhang2023biobank,gunnarsson2024scalable,
+deng2024robust}.
+
 Biobank-driven research has accelerated the development of several
 technologies, including the ability to infer Ancestral Recombination Graphs
 (ARGs) from large-scale genetic data
-\citep{Kelleher2019,Speidel2019,Zhang2023,Gunnarsson2024.08.31.610248,Deng2024.03.16.585351}.
+% \citep{Kelleher2019,Speidel2019,Zhang2023,Gunnarsson2024.08.31.610248,Deng2024.03.16.585351}.
 ARGs encode the interwoven paths of genetic inheritance resulting from
 recombination, and can be represented as genetic genealogies along the sequence
-\citep{Wong2024,Hudson1983,Griffiths1997}. They capture rich detail about
+\citep{wong2024general,Hudson1983,Griffiths1997}. They capture rich detail about
 ancestral processes influencing the samples, and have garnered great interest
 in several applications in population and statistical genetics. These include
-the detection of ultra-rare genetic variation \citep{Zhang2023}, the mapping of
+the detection of ultra-rare genetic variation \citep{zhang2023biobank}, the mapping of
 quantitative trait loci \citep{Link2023}, and the sparse and efficient modeling
 of linkage disequilibrium \citep{Nowbandegani2023}. It is evident that ARG
 inference is increasingly becoming a part of genetic data analysis pipelines.
@@ -144,9 +153,10 @@ information structure in ARGs, thereby improving  inference and analysis at
 biobank-scale. \texttt{Tsbrowse} provides interactive visual summaries of  the
 fundamental properties of ARGs, i.e. the mutations, nodes, edges and trees they
 encode. \texttt{Tsbrowse} operates on ARGs encoded as succinct tree sequences
-\citep{Wong2024}. This is the native format of \texttt{tskit} \citep{tskit}, a
+\citep{wong2024general}. This is the native format of \texttt{tskit} \citep{tskit}, a
 widely-used library for interchanging ARGs inferred using a variety of methods
-\citep{Speidel2019,Zhang2023,Haller2019,Baumdicker2021,Gunnarsson2024.08.31.610248,Deng2024.03.16.585351}.
+\citep{speidel2019method,zhang2023biobank,Haller2019,Baumdicker2021,gunnarsson2024scalable,
+deng2024robust}.
 The interface is run on a web browser. It works on biobank-scale datasets
 without requiring \textcolor{red}{raw data uploads to a server}. This is ideal
 for performing quality control and exploratory analyses on ARGs inferred from
@@ -188,10 +198,10 @@ to overlay contextual information about genes or other sequence features. }
 
 \subsection{Data model} \label{subsec:Data_Model} The foundation of
 \texttt{tsbrowse} is the \texttt{tskit} data model. As \texttt{tsbrowse} is
-based on this generalised ARG representation \citep{Wong2024} it can be applied
+based on this generalised ARG representation \citep{wong2024general} it can be applied
 to ARGs from several widely-used inference methods including \texttt{Relate}
-\citep{Speidel2019}, \texttt{ARG-Needle} \citep{Zhang2023} and \texttt{SINGER}
-\citep{Deng2024.03.16.585351}. In \texttt{tskit}, ARGs are encoded as a
+\citep{speidel2019method}, \texttt{ARG-Needle} \citep{zhang2023biobank} 
+and \texttt{SINGER} \citep{deng2024robust}. In \texttt{tskit}, ARGs are encoded as a
 collection of tables, each of which store information about a specific ARG
 property. For example, the Node table describes sampled or ancestral sequences
 and records their time of birth, and the individual and population they belong
@@ -303,7 +313,8 @@ hypothesis generation.
 
 In current practice, simulated ARGs are used as ground-truth to validate
 inferences from empirical data
-\citep{Kelleher2019,Zhang2023,Speidel2019,Gunnarsson2024.08.31.610248}.
+\citep{kelleher2019inferring,zhang2023biobank,speidel2019method,
+gunnarsson2024scalable}.
 Sophisticated techniques
 \citep{Haller2019,Baumdicker2021,Adrion2020,Lauterbur2023} to simulate ARGs
 under complex, realistic demographic models \cite{Anderson-Trocme2023} now
@@ -348,9 +359,11 @@ used until coalescence was achieved.
 \subsection{Inference of selective sweep dataset (Suppl. Fig.
 \ref{fig:Supplementary_Figure_1})} The following software were used to infer
 ARGs from the truth dataset described above: \texttt{tsinfer version 0.3.3}
-\citep{Kelleher2019}, \texttt{tsdate version 0.2.1}, \texttt{Relate version
-1.2.2} \cite{Speidel2019}, \texttt{ARG-needle version 1.0.3} \citep{Zhang2023},
-\texttt{SINGER version 0.1.8-beta} \citep{Deng2024.03.16.585351}. For all
+\citep{kelleher2019inferring}, \texttt{tsdate version 0.2.1}, 
+\texttt{Relate version 1.2.2} \cite{speidel2019method}, 
+\texttt{ARG-needle version 1.0.3} \citep{zhang2023biobank},
+\texttt{SINGER version 0.1.8-beta} \citep{deng2024robust}. 
+For all
 methods, the following parameters of inference were used: \textit{recombination
 rate = 1e-8}, \textit{mutation rate = 1e-8}, \textit{effective population size
 = 10,000}. Default values were used for all other inference parameters.
