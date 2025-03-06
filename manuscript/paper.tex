@@ -141,7 +141,7 @@ and annotations. From early standalone tools to manage \textit{C. elegans} data
 \citep{Eeckman1995}, to modern web-apps for vertebrate genomes
 \citep{Birney2004,Rangwala2024,Nassar2023}, browsers have continued to evolve
 with the changing landscape of genomics. Modern genome browsers can load
-datasets from a URL or local file system \citep{IGV-web,Lee2013,Robinson2023}.
+datasets from a URL or local file system \citep{Lee2013,Robinson2023}.
 The data security and scalability offered by this architecture ensures that
 genome browsers continue to be relevant in the biobank era.
 
@@ -171,10 +171,21 @@ information structure in ARGs, thereby improving  inference and analysis at
 biobank-scale. \texttt{Tsbrowse} provides interactive visual summaries of  the
 fundamental properties of ARGs, i.e. the mutations, nodes, edges and trees they
 encode. \texttt{Tsbrowse} operates on ARGs encoded as succinct tree sequences
-\citep{wong2024general}. This is the native format of \texttt{tskit} \citep{tskit}, a
-widely-used library for interchanging ARGs inferred using a variety of methods
-\citep{speidel2019method,zhang2023biobank,Haller2019,Baumdicker2021,gunnarsson2024scalable,
-deng2024robust}.
+\citep{wong2024general}. 
+This the \texttt{tskit} library~\citep{ralph2020efficiently}
+and supported by 
+simulation~\citep{kelleher2016efficient,kelleher2018efficient,
+haller2019tree,baumdicker2022efficient,
+adrion2020community,lauterbur2023expanding,tsambos2023link,tagami2024tstrait}
+inference~\citep{kelleher2019inferring,speidel2019method,wohns2022unified,
+mahmoudi2022bayesian,zhan2023towards,zhang2023biobank,deng2025general}
+and downstream processing methods~\citep{link2023tree,nowbandegani2023extremely}
+
+% \citep{Kelleher2019,Speidel2019,Zhang2023,Gunnarsson2024.08.31.610248,Deng2024.03.16.585351}.
+
+% widely-used library for interchanging ARGs inferred using a variety of methods
+% \citep{Speidel2019,Zhang2023,Haller2019,Baumdicker2021,Gunnarsson2024.08.31.610248,Deng2024.03.16.585351}.
+
 The interface is run on a web browser. It works on biobank-scale datasets
 without requiring \textcolor{red}{raw data uploads to a server}. This is ideal
 for performing quality control and exploratory analyses on ARGs inferred from
@@ -190,7 +201,7 @@ Holoviz suite of libraries \citep{Holoviz} is leveraged to create
 visualisations based on the pre-processed data. This choice of architecture is
 prompted by the need to represent properties of large-scale ARGs in a
 meaningful and performant way. For example, a visual representation of millions
-of mutations in SARS-Cov-2 ARGs \citep{Zhan2023.06.08.544212} could quickly
+of mutations in SARS-Cov-2 ARGs \citep{zhan2023towards} could quickly
 lead to performance bottlenecks and overplotting. Datashader
 \citep{Datashader}, a component Holoviz package, overcomes this challenge by
 rasterising huge datasets (see \hyperref[subsec:User_Interface]{User Interface}
@@ -218,8 +229,8 @@ to overlay contextual information about genes or other sequence features. }
 \texttt{tsbrowse} is the \texttt{tskit} data model. As \texttt{tsbrowse} is
 based on this generalised ARG representation \citep{wong2024general} it can be applied
 to ARGs from several widely-used inference methods including \texttt{Relate}
-\citep{speidel2019method}, \texttt{ARG-Needle} \citep{zhang2023biobank} 
-and \texttt{SINGER} \citep{deng2024robust}. In \texttt{tskit}, ARGs are encoded as a
+\citep{speidel2019method}, \texttt{ARG-Needle} \citep{zhang2023biobank} and \texttt{SINGER}
+\citep{deng2024robust}. In \texttt{tskit}, ARGs are encoded as a
 collection of tables, each of which store information about a specific ARG
 property. For example, the Node table describes sampled or ancestral sequences
 and records their time of birth, and the individual and population they belong
@@ -229,7 +240,7 @@ Mutation table records mutation events in the history of the sample, including
 the change of allelic state, time of event and node in which the event
 occurred. The Node and Edge tables describe the genealogical relationships
 between the sampled and ancestral sequences, while the Mutation table describes
-sequence variation contained in the samples \citep{Ralph2020}. This compact
+sequence variation contained in the samples. This compact
 representation enables the efficient storage and querying of biobank-scale
 ARGs. \texttt{Tsbrowse} augments these tables with additional columns to create
 a compressed \texttt{.tsbrowse} file, containing all necessary semantic
@@ -279,10 +290,12 @@ to the right provide summaries of edge spans over sequence and time.
 
 %The ability to explore ARG properties across the sequence and interact with the data makes the analysis of local genealogical patterns more intuitive.
 
+\subsection{Applications}
+
  Tsbrowse can be applied to versatile scenarios. Figure \ref{fig:Figure_2}
 highlights a use-case in visually characterising ARGs. The input ARG is a
 selective sweep dataset simulated using \texttt{msprime}
-\citep{Baumdicker2021}. The distinct pattern of edges observed in the middle of
+\citep{baumdicker2022efficient}. The distinct pattern of edges observed in the middle of
 the sequence between \textit{y=0} to \textit{y=2.5} is attributable to a burst
 in recent coalescent events, showing that tsbrowse captures this characteristic
 of a selective sweep. Supplementary Figure \ref{fig:Supplementary_Figure_1} is
@@ -308,7 +321,7 @@ to this expectation. It confirms a known algorithmic artefact due to which
 disproportionately long old ancestors are generated.
 
 Supplementary Fig. \ref{fig:Supplementary_Figure_4}, a screenshot of the
-Mutations page for SARS-CoV-2 ARGs \citep{Zhan2023.06.08.544212} demonstrates
+Mutations page for SARS-CoV-2 ARGs \citep{zhan2023towards} demonstrates
 tsbrowse's ability to handle diverse data sources. This plot represents a total
 of \textcolor{red}{X million} mutations from an inference of
 \textcolor{red}{1.27 million} sequences. After executing the
@@ -329,21 +342,20 @@ this open problem by condensing ARG properties into a set of browsable,
 interactive visual summaries, thus aiding in ARG-based data exploration and
 hypothesis generation.
 
-In current practice, simulated ARGs are used as ground-truth to validate
-inferences from empirical data
-\citep{kelleher2019inferring,zhang2023biobank,speidel2019method,
-gunnarsson2024scalable}.
-Sophisticated techniques
-\citep{Haller2019,Baumdicker2021,Adrion2020,Lauterbur2023} to simulate ARGs
-under complex, realistic demographic models \cite{Anderson-Trocme2023} now
-exist. However, models of simulation do not capture \textit{all} the nuances of
-population datasets. This results in a clear gap between ARG inference and
-application. \texttt{Tsbrowse} captures ARG properties in a model-free way,
-providing the means to qualitatively assess inferences. With notable features
-of browsability along the genome, scalability and applicability to diverse data
-sources, inference and simulation methods, \texttt{tsbrowse} has the potential
-to be integrated into biobank-scale data pipelines to improve ARG inference and
-analysis.
+% In current practice, simulated ARGs are used as ground-truth to validate
+% inferences from empirical data
+% \citep{Kelleher2019,Zhang2023,Speidel2019,Gunnarsson2024.08.31.610248}.
+% Sophisticated techniques
+% \citep{haller2019tree,baumdicker2022efficient,adrion2020community,lauterbur2023expanding} to simulate ARGs
+% under complex, realistic demographic models \cite{Anderson-Trocme2023} now
+% exist. However, models of simulation do not capture \textit{all} the nuances of
+% population datasets. This results in a clear gap between ARG inference and
+% application. \texttt{Tsbrowse} captures ARG properties in a model-free way,
+% providing the means to qualitatively assess inferences. With notable features
+% of browsability along the genome, scalability and applicability to diverse data
+% sources, inference and simulation methods, \texttt{tsbrowse} has the potential
+% to be integrated into biobank-scale data pipelines to improve ARG inference and
+% analysis.
 
 \section*{Acknowledgments}
 \section*{Author contributions}
@@ -405,7 +417,7 @@ values.
 \subsection{Inference of SARS-Cov-2 ARGs}
 
 The ARG shown in \ref{fig:Supplementary_Figure_4} was inferred with
-\texttt{sc2ts}~\citep{Zhan2023.06.08.544212} using the Viridian
+\texttt{sc2ts}~\citep{zhang2023biobank} using the Viridian
 dataset~\citep{hunt2024addressing}. It consists of 516,443 samples, 612,209
 nodes, 612,655 edges and 988,303 mutations.
 

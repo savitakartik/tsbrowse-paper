@@ -75,7 +75,7 @@
    volume = {4},
    year = {2003},
 }
-@article{Adrion2020,
+@article{adrion2020community,
    author = {Adrion, J., R. and Cole, C., C. and Dukler, N. and others},
    journal = {eLife},
    title = {A community-maintained standard library of population genetic models},
@@ -127,7 +127,6 @@
 @article{kelleher2019inferring,
   year = {2019},
   month = sep,
-  publisher = {Springer Science and Business Media {LLC}},
   volume = {51},
   number = {9},
   pages = {1330--1338},
@@ -167,28 +166,27 @@
    year = {1983},
 }
 
-@article{Haller2019,
+@article{haller2019tree,
    author = {Benjamin C. Haller and Jared Galloway and Jerome Kelleher and others},
    issue = {2},
    journal = {Molecular Ecology Resources},
-   keywords = {background selection,coalescent,genealogical history,pedigree recording,selective sweeps,tree sequences},
    month = {3},
    pages = {552-566},
-   pmid = {30565882},
-   publisher = {Blackwell Publishing Ltd},
-   title = "{Tree-sequence recording in SLiM opens new horizons for forward-time simulation of whole genomes}",
+   title = {Tree-sequence recording in {SLiM} opens new horizons for 
+       forward-time simulation of whole genomes},
    volume = {19},
    year = {2019},
 }
 
-@article{Baumdicker2021,
+@article{baumdicker2022efficient,
    author = {Baumdicker, F. and Bisschop, G. and Goldstein, D. and others},
    year = {2022},
    journal = {Genetics},
-   title = "{Efficient ancestry and mutation simulation with msprime 1.0}",
+   title = {Efficient ancestry and mutation simulation with msprime 1.0},
    volume = {220},
    issue = {3},
 }
+
 
 @article{Anderson-Trocme2023,
     author = {Anderson-Trocmé, L and Nelson, D and Zabad, S and others},
@@ -208,28 +206,30 @@
     month = {07},
 }
 
-@article{Nowbandegani2023,
-   author = {Pouria Salehi Nowbandegani and Anthony Wilder Wohns and Jenna L. Ballard and others},
+@article{nowbandegani2023extremely,
+   author = {Pouria Salehi Nowbandegani and Anthony Wilder Wohns and 
+       Jenna L. Ballard and others},
    issue = {9},
    journal = {Nature Genetics},
    month = {9},
    pages = {1494-1502},
-   pmid = {37640881},
-   publisher = {Nature Research},
    title = "{Extremely sparse models of linkage disequilibrium in ancestrally diverse association studies}",
    volume = {55},
    year = {2023},
 }
 
-@article{Link2023,
-   author = {Vivian Link and Joshua G Schraiber and Caoqi Fan and others},
-   journal = {bioRxiv : the preprint server for biology},
-   month = {4},
-   pmid = {37066144},
-   title = "{Tree-based QTL mapping with expected local genetic relatedness matrices.}",
-   url = {https://pubmed.ncbi.nlm.nih.gov/37066144/},
-   year = {2023},
+@article{link2023tree,
+  author = {Vivian Link and Joshua G Schraiber and Caoqi Fan and others},
+  title   = {Tree-based {QTL} mapping with expected local genetic relatedness matrices},
+  journal = {The American Journal of Human Genetics},
+  year    = {2023},
+  volume  = {110},
+  number  = {12},
+  pages   = {2077--2091},
+  doi     = {10.1016/j.ajhg.2023.10.017},
+  url     = {https://www.sciencedirect.com/science/article/pii/S0002929723003956}
 }
+
 
 @article{Nassar2023,
    author = {Luis R. Nassar and Galt P. Barber and Anna Benet-Pagès and others},
@@ -321,8 +321,7 @@
 }
 
 
-
-@article{Lauterbur2023,
+@article{lauterbur2023expanding,
    author = {M. Elise Lauterbur and Maria Izabel A. Cavassim and Ariella L. Gladstein and others},
    journal = {eLife},
    title = "{Expanding the stdpopsim species catalog, and lessons learned for realistic genome simulations}",
@@ -340,25 +339,20 @@
    year = {2022},
 }
 
-@article{Ralph2020,
-   author = {Peter Ralph and Kevin Thornton and Jerome Kelleher},
-   issue = {3},
-   journal = {Genetics},
-   title = "{Efficiently summarizing relationships in large samples: A general duality between statistics of genealogies and genomes}",
-   volume = {215},
-   year = {2020},
+@article {deng2024robust,
+	author = {Deng, Yun and Nielsen, Rasmus and Song, Yun S.},
+	title = "{Robust and Accurate Bayesian Inference of Genome-Wide Genealogies for Large Samples}",
+	year = {2024},
+	publisher = {Cold Spring Harbor Laboratory},
+	URL = {https://www.biorxiv.org/content/early/2024/03/16/2024.03.16.585351},
+	journal = {bioRxiv}
 }
 
-@article {Zhan2023.06.08.544212,
+@article {zhan2023towards,
 	author = {Zhan, Shing H. and Ignatieva, Anastasia and Wong, Yan and Eaton, Katherine and Jeffery, Benjamin and Palmer, Duncan S. and Murall, Carmen Lia and Otto, Sarah P. and Kelleher, Jerome},
 	title = {Towards Pandemic-Scale Ancestral Recombination Graphs of SARS-CoV-2},
-	elocation-id = {2023.06.08.544212},
 	year = {2023},
 	doi = {10.1101/2023.06.08.544212},
-	publisher = {Cold Spring Harbor Laboratory},
-	abstract = {Recombination is an ongoing and increasingly important feature of circulating lineages of SARS-CoV-2, challenging how we represent the evolutionary history of this virus and giving rise to new variants of potential public health concern by combining transmission and immune evasion properties of different lineages. Detection of new recombinant strains is challenging, with most methods looking for breaks between sets of mutations that characterise distinct lineages. In addition, many basic approaches fundamental to the study of viral evolution assume that recombination is negligible, in that a single phylogenetic tree can represent the genetic ancestry of the circulating strains. Here we present an initial version of sc2ts, a method to automatically detect recombinants in real time and to cohesively integrate them into a genealogy in the form of an ancestral recombination graph (ARG), which jointly records mutation, recombination and genetic inheritance. We infer two ARGs under different sampling strategies, and study their properties. One contains 1.27 million sequences sampled up to June 30, 2021, and the second is more sparsely sampled, consisting of 657K sequences sampled up to June 30, 2022. We find that both ARGs are highly consistent with known features of SARS-CoV-2 evolution, recovering the basic backbone phylogeny, mutational spectra, and recapitulating details on the majority of known recombinant lineages. Using the well-established and feature-rich tskit library, the ARGs can also be stored concisely and processed efficiently using standard Python tools. For example, the ARG for 1.27 million sequences{\textemdash}encoding the inferred reticulate ancestry, genetic variation, and extensive metadata{\textemdash}requires 58MB of storage, and loads in less than a second. The ability to fully integrate the effects of recombination into downstream analyses, to quickly and automatically detect new recombinants, and to utilise an efficient and convenient platform for computation based on well-engineered technologies makes sc2ts a promising approach.Competing Interest StatementThe authors have declared no competing interest.},
-	URL = {https://www.biorxiv.org/content/early/2023/06/08/2023.06.08.544212},
-	eprint = {https://www.biorxiv.org/content/early/2023/06/08/2023.06.08.544212.full.pdf},
 	journal = {bioRxiv}
 }
 
@@ -492,14 +486,6 @@
   year = 2024
 }
 
-@article{deng2024robust,
-  author = {Deng, Yun and Nielsen, Rasmus and Song, Yun S.},
-  journal = {bioRxiv},
-  publisher = {Cold Spring Harbor Laboratory},
-  title = {Robust and Accurate {Bayesian} Inference of Genome-Wide Genealogies for Large Samples},
-  year = 2024
-}
-
 @article{gunnarsson2024scalable,
     title={A scalable approach for genome-wide inference of ancestral
         recombination graphs},
@@ -523,30 +509,6 @@
     number = {6583},
     pages = {eabi8264},
     year = {2022},
-}
-
-@article{kelleher2016efficient,
-  title={Efficient coalescent simulation and genealogical analysis for large sample sizes},
-  author={Kelleher, Jerome and Etheridge, Alison M and McVean, Gilean},
-  journal={PLOS Computational Biology},
-  volume={12},
-  number={5},
-  pages={e1004842},
-  year={2016},
-  publisher={Public Library of Science}
-}
-
-@article{kelleher2018efficient,
-    author = {Kelleher, Jerome AND Thornton, Kevin R. AND Ashander, Jaime AND
-        Ralph, Peter L.},
-    journal = {PLOS Computational Biology},
-    publisher = {Public Library of Science},
-    title = {Efficient pedigree recording for fast population genetics simulation},
-    year = {2018},
-    month = {11},
-    volume = {14},
-    pages = {1-21},
-    number = {11},
 }
 
 @article{haller2018tree,
@@ -620,4 +582,124 @@
     pages={2024--04},
     year={2024},
     publisher={Cold Spring Harbor Laboratory}
+}
+
+@article{robinson2011integrative,
+    title={Integrative genomics viewer},
+    author={Robinson, James T and Thorvaldsd{\'o}ttir, Helga and Winckler,
+        Wendy and Guttman, Mitchell and Lander, Eric S and Getz, Gad and
+            Mesirov, Jill P},
+    journal={Nature biotechnology},
+    volume={29},
+    number={1},
+    pages={24--26},
+    year={2011},
+}
+
+@article{thorvaldsdottir2013integrative,
+    title={Integrative Genomics Viewer (IGV): high-performance genomics data
+        visualization and exploration},
+    author={Thorvaldsd{\'o}ttir, Helga and Robinson, James T and Mesirov,
+        Jill P},
+    journal={Briefings in bioinformatics},
+  volume={14},
+  number={2},
+  pages={178--192},
+  year={2013},
+  publisher={Oxford University Press}
+}
+
+@article{kelleher2016efficient,
+  author  = {Kelleher, Jerome and Etheridge, Alison M. and McVean, Gilean},
+  title   = {Efficient Coalescent Simulation and Genealogical Analysis for Large Sample Sizes},
+  journal = {PLOS Computational Biology},
+  year    = {2016},
+  volume  = {12},
+  number  = {5},
+  pages   = {e1004842},
+  doi     = {10.1371/journal.pcbi.1004842},
+  url     = {http://dx.doi.org/10.1371/journal.pcbi.1004842}
+}
+
+
+@article{kelleher2018efficient,
+  author  = {Kelleher, Jerome and Thornton, Kevin R. and Ashander, Jaime and Ralph, Peter L.},
+  title   = {Efficient pedigree recording for fast population genetics simulation},
+  journal = {PLOS Computational Biology},
+  year    = {2018},
+  volume  = {14},
+  number  = {11},
+  pages   = {e1006581},
+  doi     = {10.1371/journal.pcbi.1006581},
+  url     = {http://dx.doi.org/10.1371/journal.pcbi.1006581}
+}
+
+@article{tagami2024tstrait,
+    title={tstrait: a quantitative trait simulator for ancestral
+        recombination graphs},
+    author={Tagami, Daiki and Bisschop, Gertjan and Kelleher, Jerome},
+    journal={Bioinformatics},
+    volume={40},
+    number={6},
+    pages={btae334},
+    year={2024},
+    publisher={Oxford University Press}
+}
+
+@InCollection{kelleher2020coalescent,
+    author={Kelleher, Jerome and Lohse, Konrad},
+    editor={Dutheil, Julien Y.},
+    title={Coalescent Simulation with msprime},
+    bookTitle={Statistical Population Genomics},
+    year={2020},
+    publisher={Springer US},
+    address={New York, NY},
+    pages={191--230},
+}
+
+
+@article{tsambos2023link,
+    title={Link-ancestors: fast simulation of local ancestry with tree
+        sequence software},
+    author={Tsambos, Georgia and Kelleher, Jerome and Ralph, Peter and
+        Leslie, Stephen and Vukcevic, Damjan},
+    journal={Bioinformatics Advances},
+    volume={3},
+    number={1},
+    pages={vbad163},
+    year={2023},
+    publisher={Oxford University Press}
+}
+
+@article{ralph2020efficiently,
+  author  = {Ralph, Peter and Thornton, Kevin and Kelleher, Jerome},
+  title   = {Efficiently Summarizing Relationships in Large Samples: A General Duality Between Statistics of Genealogies and Genomes},
+  journal = {Genetics},
+  year    = {2020},
+  volume  = {215},
+  number  = {3},
+  pages   = {779--797},
+  doi     = {10.1534/genetics.120.303253},
+  url     = {https://doi.org/10.1534/genetics.120.303253}
+}
+
+@article{deng2025general,
+    title={A General Framework for Branch Length Estimation in Ancestral
+        Recombination Graphs},
+    author={Deng, Yun and Song, Yun S and Nielsen, Rasmus},
+    journal={bioRxiv},
+    pages={2025--02},
+    year={2025},
+    publisher={Cold Spring Harbor Laboratory}
+}
+
+@article{mahmoudi2022bayesian,
+    title={Bayesian inference of ancestral recombination graphs},
+    author={Mahmoudi, Ali and Koskela, Jere and Kelleher, Jerome and Chan,
+        Yao-ban and Balding, David},
+    journal={PLOS Computational Biology},
+    volume={18},
+    number={3},
+    pages={e1009960},
+    year={2022},
 }
