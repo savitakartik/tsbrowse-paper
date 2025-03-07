@@ -188,23 +188,6 @@ and ARGs of this scale being actively
 inferred~\citep{kelleher2019inferring,zhang2023biobank,
 zhan2023towards,gunnarsson2024scalable}.
 
-% Its focus is on interactively visualising the
-% information structure in ARGs at all scales.
-
-% \texttt{Tsbrowse} provides interactive visual summaries of  the
-% fundamental properties of ARGs, i.e. the mutations, nodes, edges and trees they
-% encode. 
-
-% \texttt{Tsbrowse} operates on ARGs encoded as succinct tree sequences
-% \citep{wong2024general}. 
-% This the \texttt{tskit} library~\citep{ralph2020efficiently}
-% and supported by 
-% simulation~\citep{kelleher2016efficient,kelleher2018efficient,
-% haller2019tree,baumdicker2022efficient,
-% adrion2020community,lauterbur2023expanding,korfmann2023weak,tsambos2023link,tagami2024tstrait}
-% inference~\citep{kelleher2019inferring,speidel2019method,wohns2022unified,
-% mahmoudi2022bayesian,zhan2023towards,zhang2023biobank,deng2025general}
-% and downstream processing methods~\citep{fan2022genealogical,nowbandegani2023extremely}
 
 % \citep{Kelleher2019,Speidel2019,Zhang2023,Gunnarsson2024.08.31.610248,Deng2024.03.16.585351}.
 
@@ -217,9 +200,70 @@ zhan2023towards,gunnarsson2024scalable}.
 % biobank datasets. 
 
 
-\section{Results} \subsection{Architecture} \texttt{Tsbrowse}
-is run in a step-wise approach (Figure \ref{fig:Figure_1}), which makes it
-convenient to handle large datasets. The initial step (\texttt{tsbrowse
+\section{Results} 
+
+\begin{figure} \centering
+\includegraphics[width=0.95\linewidth]{figures/MainFig1.png}
+\caption{\textbf{Overview of tsbrowse architecture. } In tskit, ARGs are
+defined by a collection of tables. Exemplar
+table names are denoted in dark blue and columns that describe the property in
+light blue. In the pre-process step, tables are augmented with additional
+information computed for each property (yellow). The output from this
+pre-processing step is stored as a \texttt{.tsbrowse} file. Next the serve step
+renders the visualisation in a web browser by leveraging tools in the Holoviz
+ecosystem. Optional annotations are provided as an input file, allowing users
+to overlay contextual information about genes or other sequence features. }
+\label{fig:Figure_1} \end{figure}
+
+\subsection{Data model} \label{subsec:Data_Model} 
+\texttt{Tsbrowse} uses the ``succinct tree sequence'' encoding of 
+ARGS~\citep{wong2024general}. This efficient ARG encoding 
+is implemented by the 
+\texttt{tskit} library~\citep{ralph2020efficiently}
+and supported by most modern ARG
+simulation~\citep{kelleher2016efficient,kelleher2018efficient,
+haller2019tree,baumdicker2022efficient,
+adrion2020community,lauterbur2023expanding,korfmann2023weak,
+tsambos2023link,tagami2024tstrait},
+inference~\citep{kelleher2019inferring,speidel2019method,wohns2022unified,
+mahmoudi2022bayesian,zhan2023towards,zhang2023biobank,deng2025general},
+and processing methods~\citep{fan2022genealogical,nowbandegani2023extremely}.
+In \texttt{tskit}, ARGs are encoded as a
+collection of tables, storing information about a specific ARG
+property (Fig.~\ref{fig:Figure_1}).
+% For example, the Node table describes sampled or ancestral sequences
+% and records their time of birth, and the individual and population they belong
+% to. The Edge table describes the relationship between pairs of nodes, and
+% records the node IDs and the genomic locations over which the edge spans. The
+% Mutation table records mutation events in the history of the sample, including
+% the change of allelic state, time of event and node in which the event
+% occurred. 
+The Node and Edge tables describe the genealogical relationships
+between the sampled and ancestral sequences, 
+while the Mutation table describes
+sequence variation contained in the samples. 
+\texttt{Tsbrowse} augments these tables with additional columns to create
+a compressed \texttt{.tsbrowse} file, containing all necessary semantic
+metadata required for automatic visualisation.
+% (see \hyperref[subsec:User_Interface]{User Interface}). 
+
+\subsection{Architecture} 
+\texttt{Tsbrowse} is a client-server application (Fig.~\ref{fig:Figure_1}).
+The server is a command-line interface program written in Python, which
+is run on the computer where the ARG we wish to visualise is available.
+The client is a web-browser, which may optionally be running 
+on a different machine. There are two important advantages to this 
+approach over a monolithic single-machine architecture. Firstly, 
+the ARG being visualised remains in-situ and does not need to be 
+downloaded from the server; summaries of the ARG at various 
+scales are sent to the client on demand.
+Secondly, this provides the flexibility to use a powerful server
+when generating summaries of ARG while using a standard desktop 
+machine for visualisation.
+
+\texttt{Tsbrowse} is run in a step-wise approach (Fig.~\ref{fig:Figure_1}), 
+which makes it convenient to handle large datasets. 
+The initial step (\texttt{tsbrowse
 preprocess}) prepares the data for visualisation. It can be performed
 separately on a large machine, and the output stored for later use. The second
 step (\texttt{tsbrowse serve}), which can be run on a smaller machine, creates
@@ -240,40 +284,6 @@ is limited to the server side, keeping the client-side interface lightweight.
 For large datasets with complex visualisations, this achieves a smoother user
 experience.
 
-\begin{figure} \centering
-\includegraphics[width=0.95\linewidth]{figures/MainFig1.png}
-\caption{\textbf{Overview of tsbrowse architecture. } In tskit, ARGs are
-defined by a collection of tables which broadly map to ARG properties. Exemplar
-table names are denoted in dark blue and columns that describe the property in
-light blue. In the pre-process step, tables are augmented with additional
-information computed for each property (yellow). The output from this
-pre-processing step is stored as a \texttt{.tsbrowse} file. Next the serve step
-renders the visualisation in a web browser by leveraging tools in the Holoviz
-ecosystem. Optional annotations are provided as an input file, allowing users
-to overlay contextual information about genes or other sequence features. }
-\label{fig:Figure_1} \end{figure}
-
-\subsection{Data model} \label{subsec:Data_Model} The foundation of
-\texttt{tsbrowse} is the \texttt{tskit} data model. As \texttt{tsbrowse} is
-based on this generalised ARG representation \citep{wong2024general} it can be applied
-to ARGs from several widely-used inference methods including \texttt{Relate}
-\citep{speidel2019method}, \texttt{ARG-Needle} \citep{zhang2023biobank} and \texttt{SINGER}
-\citep{deng2024robust}. In \texttt{tskit}, ARGs are encoded as a
-collection of tables, each of which store information about a specific ARG
-property. For example, the Node table describes sampled or ancestral sequences
-and records their time of birth, and the individual and population they belong
-to. The Edge table describes the relationship between pairs of nodes, and
-records the node IDs and the genomic locations over which the edge spans. The
-Mutation table records mutation events in the history of the sample, including
-the change of allelic state, time of event and node in which the event
-occurred. The Node and Edge tables describe the genealogical relationships
-between the sampled and ancestral sequences, while the Mutation table describes
-sequence variation contained in the samples. This compact
-representation enables the efficient storage and querying of biobank-scale
-ARGs. \texttt{Tsbrowse} augments these tables with additional columns to create
-a compressed \texttt{.tsbrowse} file, containing all necessary semantic
-metadata required for automatic visualisation (see
-\hyperref[subsec:User_Interface]{User Interface}). 
 
 \subsection{User Interface}
 \label{subsec:User_Interface}
