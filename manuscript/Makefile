@@ -6,3 +6,6 @@ paper.pdf: paper.tex reference.bib
 	bibtex paper
 	pdflatex paper.tex
 	pdflatex paper.tex
+clean:
+	rm -f *.pdf *.aux *.bbl *.out
+
