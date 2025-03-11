@@ -248,46 +248,71 @@ metadata required for automatic visualisation.
 % (see \hyperref[subsec:User_Interface]{User Interface}). 
 
 \subsection{Architecture} 
-\texttt{Tsbrowse} is a client-server application (Fig.~\ref{fig:Figure_1}).
-The server is a command-line interface program written in Python, which
-is run on the computer where the ARG we wish to visualise is available.
-The client is a web-browser, which may optionally be running 
-on a different machine. There are two important advantages to this 
-approach over a monolithic single-machine architecture. Firstly, 
+\texttt{Tsbrowse} is a modular client-server application 
+written in Python, optimised for handling ARGs with millions
+of samples (Fig.~\ref{fig:Figure_1}). 
+To ensure that such large ARGs can be visualised quickly
+we perform a preprocessing step (\texttt{tsbrowse preprocess})
+which augments the \texttt{tskit} 
+data model with some additional derived information (e.g., the number 
+of inheritors of each mutation).
+To visualise an ARG we then run \texttt{tsbrowse serve}, which 
+by default will open a browser window on the local machine, but 
+also supports running the server on a remote machine across the 
+network.
+This client-server architecture has some important advantages over
+a monolithic single-machine approach. Most importantly,
 the ARG being visualised remains in-situ and does not need to be 
-downloaded from the server; summaries of the ARG at various 
-scales are sent to the client on demand.
-Secondly, this provides the flexibility to use a powerful server
-when generating summaries of ARG while using a standard desktop 
-machine for visualisation.
+downloaded from the server. 
 
-\texttt{Tsbrowse} is run in a step-wise approach (Fig.~\ref{fig:Figure_1}), 
-which makes it convenient to handle large datasets. 
-The initial step (\texttt{tsbrowse
-preprocess}) prepares the data for visualisation. It can be performed
-separately on a large machine, and the output stored for later use. The second
-step (\texttt{tsbrowse serve}), which can be run on a smaller machine, creates
-and renders visualisations. This step follows a client-server architecture. On
-the server side (the machine on which \texttt{tsbrowse serve} is run), the
-Holoviz suite of libraries \citep{Holoviz} is leveraged to create
-visualisations based on the pre-processed data. This choice of architecture is
-prompted by the need to represent properties of large-scale ARGs in a
-meaningful and performant way. For example, a visual representation of millions
-of mutations in SARS-Cov-2 ARGs \citep{zhan2023towards} could quickly
-lead to performance bottlenecks and overplotting. Datashader
-\citep{Datashader}, a component Holoviz package, overcomes this challenge by
-rasterising huge datasets (see \hyperref[subsec:User_Interface]{User Interface}
-for details, and Supplementary Figure \ref{fig:Supplementary_Figure_4} for a
-tsbrowse view of SARS-Cov-2 mutations). A web browser client connects to the
-server to render and interact with these visualisations. Heavy data processing
-is limited to the server side, keeping the client-side interface lightweight.
-For large datasets with complex visualisations, this achieves a smoother user
-experience.
+The express goal of \texttt{tsbrowse} is to provide interpretable
+and interactive visual summaries of ARGs containing millions of nodes, edges 
+and mutations. Mutations, for example, have a clear interpretation
+when plotted on genome coordinate vs time axes, but at this scale 
+the data density is far too high to simply plot each mutation as a point.
+We overcome this problem by using Datashader and the wider 
+Holoviz ecosystem~\citep{Holoviz}, which efficiently rasterises large datasets
+at the requested resolution on the server, sends the image to the web-browser
+for display, and dynamically updates as the user interatively navigates the ARG.
 
+% and renders visualisations. This step follows a client-server architecture. On
+% the server side (the machine on which \texttt{tsbrowse serve} is run), the
+% Holoviz suite of libraries \citep{Holoviz} is leveraged to create
+% visualisations based on the pre-processed data. This choice of architecture is
+% prompted by the need to represent properties of large-scale ARGs in a
+% meaningful and performant way. For example, a visual representation of millions
+% of mutations in SARS-Cov-2 ARGs \citep{zhan2023towards} could quickly
+% lead to performance bottlenecks and overplotting. Datashader
+% \citep{Datashader}, a component Holoviz package, overcomes this challenge by
+% rasterising huge datasets (see \hyperref[subsec:User_Interface]{User Interface}
+% for details, and Supplementary Figure \ref{fig:Supplementary_Figure_4} for a
+% tsbrowse view of SARS-Cov-2 mutations). A web browser client connects to the
+
+% \texttt{Tsbrowse} is run in a step-wise approach (Fig.~\ref{fig:Figure_1}), 
+% which makes it convenient to handle large datasets. 
+% The initial step (\texttt{tsbrowse
+% preprocess}) prepares the data for visualisation. It can be performed
+% separately on a large machine, and the output stored for later use. The second
+% step (\texttt{tsbrowse serve}), which can be run on a smaller machine, creates
+% and renders visualisations. This step follows a client-server architecture. On
+% the server side (the machine on which \texttt{tsbrowse serve} is run), the
+% Holoviz suite of libraries \citep{Holoviz} is leveraged to create
+% visualisations based on the pre-processed data. This choice of architecture is
+% prompted by the need to represent properties of large-scale ARGs in a
+% meaningful and performant way. For example, a visual representation of millions
+% of mutations in SARS-Cov-2 ARGs \citep{zhan2023towards} could quickly
+% lead to performance bottlenecks and overplotting. Datashader
+% \citep{Datashader}, a component Holoviz package, overcomes this challenge by
+% rasterising huge datasets (see \hyperref[subsec:User_Interface]{User Interface}
+% for details, and Supplementary Figure \ref{fig:Supplementary_Figure_4} for a
+% tsbrowse view of SARS-Cov-2 mutations). A web browser client connects to the
+% server to render and interact with these visualisations. Heavy data processing
+% is limited to the server side, keeping the client-side interface lightweight.
+% For large datasets with complex visualisations, this achieves a smoother user
+% experience.
 
 \subsection{User Interface}
 \label{subsec:User_Interface}
-
 \begin{figure}
     \centering
     \includegraphics[width=0.95\linewidth]{figures/MainFig2.png}
@@ -296,24 +321,20 @@ experience.
 
     \label{fig:Figure_2}
 \end{figure}
-
-\texttt{Tsbrowse}'s interface is built on the \texttt{Holoviz} ecosystem
-\citep{Holoviz}, which brings together \texttt{Datashader}, \texttt{Bokeh},
-\texttt{Panel}, \texttt{Holoviews} and other libraries to create seamless data
-visualisation pipelines even for large datasets. A key challenge with
-large-scale data visualisation is to maintain a responsive user interface.
-\texttt{Datashader} aggregates data and renders only the necessary data points
-at a given zoom level, thereby minimising the computational load on the
-browser. A \texttt{Bokeh} plotting back-end provides useful tools and widgets.
-The \textit{pan}, \textit{select} and \textit{zoom} tools enable interactivity
-with individual data points, allowing users to gain deeper insights from the
-data. The \texttt{serve} step accepts an optional input file containing
-sequence annotations. This allows users to overlay contextual information about
-genes or other sequence features. 
-
-
-
-The user interface is presented as a \texttt{Panel} dashboard, with pages to
+% \texttt{Tsbrowse}'s interface is built on the \texttt{Holoviz} ecosystem
+% \citep{Holoviz}, which brings together \texttt{Datashader}, \texttt{Bokeh},
+% \texttt{Panel}, \texttt{Holoviews} and other libraries to create seamless data
+% visualisation pipelines even for large datasets. A key challenge with
+% large-scale data visualisation is to maintain a responsive user interface.
+% \texttt{Datashader} aggregates data and renders only the necessary data points
+% at a given zoom level, thereby minimising the computational load on the
+% browser. A \texttt{Bokeh} plotting back-end provides useful tools and widgets.
+% The \textit{pan}, \textit{select} and \textit{zoom} tools enable interactivity
+% with individual data points, allowing users to gain deeper insights from the
+% data. The \texttt{serve} step accepts an optional input file containing
+% sequence annotations. This allows users to overlay contextual information about
+% genes or other sequence features. 
+The user interface is presented as a dashboard, with pages to
 describe mutations, nodes, edges and trees in the input ARG. Figure 2
 demonstrates the user interface using the Edges page as an example. The plot on
 the left is an overview of all 33,929 edges (parent-child relationships between
