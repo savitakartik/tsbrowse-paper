@@ -231,8 +231,9 @@ inference~\citep{kelleher2019inferring,speidel2019method,wohns2022unified,
 mahmoudi2022bayesian,zhan2023towards,zhang2023biobank,deng2025general},
 and processing methods~\citep{fan2022genealogical,nowbandegani2023extremely}.
 In \texttt{tskit}, ARGs are encoded as a
-collection of tables, storing information about a specific ARG
-property (Fig.~\ref{fig:Figure_1}).
+collection of tables, storing information about the 
+nodes and edges that describe the graph topology and the sites 
+and mutations encoding the sequence variation (Fig.~\ref{fig:Figure_1}).
 % For example, the Node table describes sampled or ancestral sequences
 % and records their time of birth, and the individual and population they belong
 % to. The Edge table describes the relationship between pairs of nodes, and
@@ -240,24 +241,25 @@ property (Fig.~\ref{fig:Figure_1}).
 % Mutation table records mutation events in the history of the sample, including
 % the change of allelic state, time of event and node in which the event
 % occurred. 
-The Node and Edge tables describe the genealogical relationships
-between the sampled and ancestral sequences, 
-while the Mutation table describes
-sequence variation contained in the samples. 
-\texttt{Tsbrowse} augments these tables with additional columns to create
-a compressed \texttt{.tsbrowse} file, containing all necessary semantic
-metadata required for automatic visualisation.
+% The Node and Edge tables describe the genealogical relationships
+% between the sampled and ancestral sequences, 
+% while the Mutation table describes
+% sequence variation contained in the samples. 
 % (see \hyperref[subsec:User_Interface]{User Interface}). 
 
 \subsection{Architecture} 
 \texttt{Tsbrowse} is a modular client-server application 
-written in Python, optimised for handling ARGs with millions
+written in Python, optimised for ARGs with millions
 of samples (Fig.~\ref{fig:Figure_1}). 
-To ensure that such large ARGs can be visualised quickly
-we perform a preprocessing step (\texttt{tsbrowse preprocess})
-which augments the \texttt{tskit} 
-data model with some additional derived information (e.g., the number 
-of inheritors of each mutation).
+The application has two basic commands: \texttt{preprocess}
+and \texttt{serve}. The \texttt{preprocess} command 
+takes an input ARG file and augments the \texttt{tskit} 
+tables with additional columns,
+precomputing all the information required for visualisation,
+and storing as a compressed \texttt{.tsbrowse} file.
+(The \texttt{.tsbrowse} file is also a valid input for 
+\texttt{tszip}, a general utility for compressing \texttt{tskit}
+files.)
 To visualise an ARG we then run \texttt{tsbrowse serve}, which 
 by default will open a browser window on the local machine, but 
 also supports running the server on a remote machine across the 
@@ -267,7 +269,7 @@ a monolithic single-machine approach. Most importantly,
 the ARG being visualised remains in-situ and does not need to be 
 downloaded from the server. 
 
-The express goal of \texttt{tsbrowse} is to provide interpretable
+The goal of \texttt{tsbrowse} is to provide interpretable
 and interactive visual summaries of ARGs containing millions of nodes, edges 
 and mutations. Mutations, for example, have a clear interpretation
 when plotted on genome coordinate vs time axes, but at this scale 
@@ -276,6 +278,13 @@ We overcome this problem by using Datashader and the wider
 Holoviz ecosystem~\citep{Holoviz}, which efficiently rasterises large datasets
 at the requested resolution on the server, sends the image to the web-browser
 for display, and dynamically updates as the user interatively navigates the ARG.
+This approach allows us to summarise very large ARGs interactively;
+Fig~\ref{fig:Supplementary_Figure_4}, for example, shows a screenshot of 
+\texttt{tsbrowse} summarising almost 1 million mutations along the SARS-Cov-2
+genome.
+
+% Fig~\ref{fig:Figure_2} shows an example of how edges are visualised 
+% under this 
 
 % and renders visualisations. This step follows a client-server architecture. On
 % the server side (the machine on which \texttt{tsbrowse serve} is run), the
