@@ -1,4 +1,4 @@
-%%
+%Fig~\ref{fig:Figure_2} %
 %% Copyright 2022 OXFORD UNIVERSITY PRESS
 %%
 %% This file is part of the 'oup-authoring-template Bundle'.
@@ -374,19 +374,21 @@ developers.
 %The ability to explore ARG properties across the sequence and interact with the data makes the analysis of local genealogical patterns more intuitive.
 
 \subsection{Applications}
-
- Tsbrowse can be applied to versatile scenarios. Figure \ref{fig:Figure_2}
-highlights a use-case in visually characterising ARGs. The input ARG is a
-selective sweep dataset simulated using \texttt{msprime}
-\citep{baumdicker2022efficient}. The distinct pattern of edges observed in the middle of
-the sequence between \textit{y=0} to \textit{y=2.5} is attributable to a burst
-in recent coalescent events, showing that tsbrowse captures this characteristic
-of a selective sweep. Supplementary Figure \ref{fig:Supplementary_Figure_1} is
-another example of characterising ARGs with tsbrowse. The view of edges from
-four different inferences of the same dataset (inferred with \texttt{tsinfer} +
-\texttt{tsdate} (Panel A), \texttt{Relate} (Panel B), \texttt{ARG-Needle}
-(Panel C) and \texttt{SINGER} (Panel D)), reflects qualitative differences
-between inference methods. 
+The purpose of \texttt{tsbrowse} is to provide an interactive view of the 
+\texttt{tskit} ARG data model to guide intuition, improve inference quality control
+and facilitate debugging. An example of how we can deepen our understanding
+using the genome-browser-like perspective provided by \texttt{tsbrowse}
+is provided the simulated ARG of Fig~\ref{fig:Figure_2}, where 
+the gap in the edges view corresponds to the characteristic dip in diversity
+of a selective sweep. Comparing this ground truth to the ARGs inferred
+by four different inference methods in Fig~\ref{fig:Supplementary_Figure_1},
+we can see that there are substantial qualitative differences between the
+results. These differences in ancestral haplotypes illustrated by 
+the edges view are unlikely to be captured by the tree-by-tree distance
+metrics usually used to evaluate
+inference methods~\citep[e.g.][]{kelleher2019inferring,zhang2023biobank},
+providing further motivation for new and improved ways to compare
+simulated and inferred ARGs~\citep{fritze2024forest}.
 
 We demonstrate a further application of tsbrowse in validating inferences
 (Supplementary Figures \ref{fig:Supplementary_Figure_2} and
