@@ -41,4 +41,8 @@ Provenances 1131    1.7 MiB
 Sites   29803   3.1 MiB
 ```
 
+Serve command:
+```
+$ python3 -m tsbrowse serve v1-beta1_2023-02-21.pp.md.il.ts.tsbrowse --annotations-file sc2-annotation.csv
+```
 
