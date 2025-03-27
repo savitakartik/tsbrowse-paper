@@ -280,8 +280,8 @@ at the requested resolution on the server, sends the image to the web-browser
 for display, and dynamically updates as the user interatively navigates the ARG.
 This approach allows us to summarise very large ARGs interactively;
 Fig~\ref{fig:Supplementary_Figure_4}, for example, shows a screenshot of 
-\texttt{tsbrowse} summarising almost 1 million mutations along the SARS-CoV-2
-genome.
+\texttt{tsbrowse} summarising the 1.9 million mutations in a SARS-CoV-2
+ARG with around 2.7 million nodes and edges.
 
 % Fig~\ref{fig:Figure_2} shows an example of how edges are visualised 
 % under this 
@@ -542,12 +542,44 @@ site density lesser than 5 per kb were discarded. For Suppl. Fig. 2,
 with \textit{mutation rate = 1.29e-8}, setting all other parameters to default
 values. 
 
-\subsection{Inference of SARS-Cov-2 ARGs}
-
-The ARG shown in \ref{fig:Supplementary_Figure_4} was inferred with
+\subsection{Inference of SARS-CoV-2 ARGs}
+The ARG shown in Fig \ref{fig:Supplementary_Figure_4} was inferred with
 \texttt{sc2ts}~\citep{zhang2023biobank} using the Viridian
-dataset~\citep{hunt2024addressing}. It consists of 516,443 samples, 612,209
-nodes, 612,655 edges and 988,303 mutations.
+dataset~\citep{hunt2024addressing}. It consists of 
+2,482,157 samples
+2,689,054 nodes,
+2,689,982 edges
+and
+1,923,169 mutations.
+% Trees   348
+% Sequence Length 29904.0
+% Time Units  days
+% Sample Nodes    2482157
+% Total Size  1.5 GiB
+% Table   Rows    Size    Has Metadata
+% Edges   2689982 82.1 MiB
+% Individuals 0   24 Bytes
+% Migrations  0   8 Bytes
+% Mutations   1923169 202.7 MiB
+% Nodes   2689054 1.1 GiB
+% Populations 0   8 Bytes
+% Provenances 1131    1.7 MiB
+% Sites   29803   3.1 MiB
+Running \texttt{tsbrowse preprocess} on the input \texttt{tszip} file (113M)
+required 2m19s time elapsed (15m15s CPU time) on an Intel Core(TM) i7-9700 CPU.
+The resulting \texttt{.tsbrowse} file size was 130M.
+% Preprocessing completed. You can now view with `python -m tsbrowse serve v1-beta1_2023-02-21.pp.md.il.ts.tsbrowse`
+
+% real    2m19.028s
+% user    15m15.049s
+% sys     0m8.159s
+% ```
+% Sizes:
+% ```
+% $ ls -lh v1-beta1_2023-02-21.pp.md.il.ts.ts*
+% -rw-rw-r-- 1 jk jk 130M Mar 27 15:08 v1-beta1_2023-02-21.pp.md.il.ts.tsbrowse
+% -rw-r--r-- 1 jk jk 113M Mar 27 15:04 v1-beta1_2023-02-21.pp.md.il.ts.tsz
+% ```
 
 \subsection{} Code to recreate datasets and infer ARGs are available in an
 accompanying repository:
@@ -597,8 +629,9 @@ histogram at the bottom shows the distribution of node spans. }
 \begin{figure}
     \centering
     \includegraphics[width=0.95\linewidth]{figures/SuppFig4.png}
-    \caption{\textbf{\texttt{tsbrowse} applied to SARS-CoV2 ARGs.}
-    A screenshot of \texttt{tsbrowse}'s depiction of 988,303 mutations in an 
+    \caption{\textbf{\texttt{tsbrowse} applied to SARS-CoV-2 ARGs.}
+    A screenshot of \texttt{tsbrowse}'s depiction of 
+    1,923,169 mutations in an
     ARG inferred by \texttt{sc2ts}; see  text for details. Also shown are the 
     gene annotations along the X-axis.}
     \label{fig:Supplementary_Figure_4}
