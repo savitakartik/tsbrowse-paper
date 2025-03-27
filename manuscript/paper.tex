@@ -280,7 +280,7 @@ at the requested resolution on the server, sends the image to the web-browser
 for display, and dynamically updates as the user interatively navigates the ARG.
 This approach allows us to summarise very large ARGs interactively;
 Fig~\ref{fig:Supplementary_Figure_4}, for example, shows a screenshot of 
-\texttt{tsbrowse} summarising almost 1 million mutations along the SARS-Cov-2
+\texttt{tsbrowse} summarising almost 1 million mutations along the SARS-CoV-2
 genome.
 
 % Fig~\ref{fig:Figure_2} shows an example of how edges are visualised 
@@ -390,33 +390,60 @@ inference methods~\citep[e.g.][]{kelleher2019inferring,zhang2023biobank},
 providing further motivation for new and improved ways to compare
 simulated and inferred ARGs~\citep{fritze2024forest}.
 
-We demonstrate a further application of tsbrowse in validating inferences
-(Supplementary Figures \ref{fig:Supplementary_Figure_2} and
-\ref{fig:Supplementary_Figure_3}). Supplementary Figure
-\ref{fig:Supplementary_Figure_2} shows how mutation patterns in a 2D plot of
-genomic position and mutation age are helpful in spotting poorly inferred
-regions. Excluding regions with low site density from the variant data improves
-the quality of inference (Panel B). Supplementary Figure
-\ref{fig:Supplementary_Figure_3} shows the genomic spans of ancestral nodes in
-an ARG inferred with tsinfer. Population genetics theory predicts that IBD
-(Identical By Descent) segments break down over time, resulting in shorter
-ancestral segments further back in the history of the samples. At time,
-\textit{y \textgreater{0.8}}, the plot reveals a pattern of node spans contrary
-to this expectation. It confirms a known algorithmic artefact due to which
-disproportionately long old ancestors are generated.
+Interest in ARG-based methods is burgeoning, but the methods are new 
+and practical guidance on applying inferences to real data is lacking.
+Data filtering is essential, and the effects of the 
+choices that must be made along any bioinformatics pipeline on the final
+ARG are hard to predict and quantify. \texttt{Tsbrowse} was primarily
+developed as a way to quickly visualise the effects of such filtering
+choices on ARGs inferred by \texttt{tsinfer}, and it is now an indispensible
+element of the inference pipeline. Fig~\ref{fig:Supplementary_Figure_2} 
+shows [a before and after view for 1000G data, where tsbrowse helped 
+diagnose and resolve an opaque data problem].
+These interactive visualisations have also helped diagnose issues with
+the \texttt{tsinfer} inference algorithm. 
+Fig~\ref{fig:Supplementary_Figure_3} shows the genomic spans of 
+ancestral nodes in an ARG inferred with tsinfer, demonstrating a clear 
+excess of long haplotypes in the very ancient past. These insights 
+have helped guide development and 
+may lead to significant improvements in performance.
 
-Supplementary Fig. \ref{fig:Supplementary_Figure_4}, a screenshot of the
-Mutations page for SARS-CoV-2 ARGs \citep{zhan2023towards} demonstrates
-tsbrowse's ability to handle diverse data sources. This plot represents a total
-of \textcolor{red}{X million} mutations from an inference of
-\textcolor{red}{1.27 million} sequences. After executing the
-\texttt{preprocess} step, the page loads in \textcolor{red}{X} seconds on a
-system with \textcolor{red}{Y GB RAM}, showing that it is possible to visualise
-large-scale datasets in a performant way. Panel B demonstrates a useful
-interactive feature; additional information about a mutation event (for
-example, the mutational frequency in predefined populations, or the number of
-sample nodes carrying the mutation) is displayed on mouse-over of individual
-data points.
+% . Population genetics theory predicts that IBD
+% (Identical By Descent) segments break down over time, resulting in shorter
+% ancestral segments further back in the history of the samples. At time,
+% \textit{y \textgreater{0.8}}, the plot reveals a pattern of node spans contrary
+% to this expectation. It confirms a known algorithmic artefact due to which
+% disproportionately long old ancestors are generated.
+
+
+% We demonstrate a further application of tsbrowse in validating inferences
+% (Supplementary Figures 
+% \ref{fig:Supplementary_Figure_3}). Supplementary Figure
+% \ref{fig:Supplementary_Figure_2} shows how mutation patterns in a 2D plot of
+% genomic position and mutation age are helpful in spotting poorly inferred
+% regions. Excluding regions with low site density from the variant data improves
+% the quality of inference (Panel B). 
+% Supplementary Figure
+% \ref{fig:Supplementary_Figure_3} shows the genomic spans of ancestral nodes in
+% an ARG inferred with tsinfer. Population genetics theory predicts that IBD
+% (Identical By Descent) segments break down over time, resulting in shorter
+% ancestral segments further back in the history of the samples. At time,
+% \textit{y \textgreater{0.8}}, the plot reveals a pattern of node spans contrary
+% to this expectation. It confirms a known algorithmic artefact due to which
+% disproportionately long old ancestors are generated.
+
+% Supplementary Fig. \ref{fig:Supplementary_Figure_4}, a screenshot of the
+% Mutations page for SARS-CoV-2 ARGs \citep{zhan2023towards} demonstrates
+% tsbrowse's ability to handle diverse data sources. This plot represents a total
+% of \textcolor{red}{X million} mutations from an inference of
+% \textcolor{red}{1.27 million} sequences. After executing the
+% \texttt{preprocess} step, the page loads in \textcolor{red}{X} seconds on a
+% system with \textcolor{red}{Y GB RAM}, showing that it is possible to visualise
+% large-scale datasets in a performant way. Panel B demonstrates a useful
+% interactive feature; additional information about a mutation event (for
+% example, the mutational frequency in predefined populations, or the number of
+% sample nodes carrying the mutation) is displayed on mouse-over of individual
+% data points.
 
 \section{Discussion} \label{sec:Discussion} Visualisation techniques are
 essential for data-driven insights. Specialised tools such as \textit{Treenome
