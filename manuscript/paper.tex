@@ -120,7 +120,7 @@ decades~\citep{Hudson1983,Griffiths1997} it is only with recent breakthroughs
 in inference methods~\citep{rasmussen2014genome,
 speidel2019method,kelleher2019inferring,wohns2022unified,zhang2023biobank,
 gunnarsson2024scalable,deng2024robust} that practical application has 
-become possible. Varied applications
+become possible. Varied applications have been recently proposed,
 such as inferring selection~\citep{stern2019approximate,hejase2022deep} and 
 the spatial 
 location of genetic
@@ -131,17 +131,19 @@ and other methodological improvements for genome wide association
 studies~\citep{nowbandegani2023extremely,link2023tree},
 and the development of machine learning methods using inferred
 ARGs as input~\citep{hejase2022deep,pearson2023local,korfmann2024simultaneous,
-whitehouse2024tree} all depend critically on the \emph{accuracy}
-of the inferred ARGs. 
-Although studies benchmarking the various inference methods on 
+whitehouse2024tree}.
+While these developements are exciting, the performance 
+of these new methods depend critically on the accuracy of the inferred ARGs,
+and although studies benchmarking the various inference methods on 
 simulated data have emerged 
 \citep{brandt2022evaluation,deng2024robust,peng2024evaluating},
 the practicalities of applying ARG inference to real data is 
-understudied, and there is a critial lack of software infrastructure
-to support evaluating the quality of estimated ARGs.
+understudied. In particular, there is a critial lack of software 
+infrastructure to support evaluation and quality control of 
+inferred ARGs.
 
 Visualisation is fundamentally important to data analysis.
-Many specialised tools exists to aid the visual analysis and 
+Many specialised tools exist to aid the visual analysis and 
 quality control
 of assembly~\citep{wick2015bandage,challis2020blobtoolkit},
 read mapping~\citep{robinson2011integrative},
@@ -184,9 +186,9 @@ individual nodes, edges and mutations. Supporting very large ARGs is a
 particular focus for \texttt{tsbrowse}, as millions of genome
 sequences have been sampled for several
 species~\citep{cesarani2022multibreed,stark2024call,hunt2024addressing}
-and ARGs of this scale being actively
-inferred~\citep{kelleher2019inferring,zhang2023biobank,
-zhan2023towards,gunnarsson2024scalable}.
+and ARGs of this scale are a particular focus of ongoing 
+research~\citep{kelleher2019inferring,zhang2023biobank,
+zhan2023towards,anderson2023on,gunnarsson2024scalable}.
 
 
 % \citep{Kelleher2019,Speidel2019,Zhang2023,Gunnarsson2024.08.31.610248,Deng2024.03.16.585351}.
