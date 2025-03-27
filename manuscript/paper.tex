@@ -403,7 +403,7 @@ diagnose and resolve an opaque data problem].
 These interactive visualisations have also helped diagnose issues with
 the \texttt{tsinfer} inference algorithm. 
 Fig~\ref{fig:Supplementary_Figure_3} shows the genomic spans of 
-ancestral nodes in an ARG inferred with tsinfer, demonstrating a clear 
+ancestral nodes in an ARG inferred with \texttt{tsinfer}, demonstrating a clear 
 excess of long haplotypes in the very ancient past. These insights 
 have helped guide development and 
 may lead to significant improvements in performance.
@@ -445,14 +445,21 @@ may lead to significant improvements in performance.
 % sample nodes carrying the mutation) is displayed on mouse-over of individual
 % data points.
 
-\section{Discussion} \label{sec:Discussion} Visualisation techniques are
-essential for data-driven insights. Specialised tools such as \textit{Treenome
-browser} \citep{Kramer2023} tackle the challenge of semantic visualisation of
-large phylogenies. Yet capturing the data model underlying ARGs is crucial for
-the systematic exploration of local genealogies. \texttt{Tsbrowse} addresses
-this open problem by condensing ARG properties into a set of browsable,
-interactive visual summaries, thus aiding in ARG-based data exploration and
-hypothesis generation.
+\section{Discussion} \label{sec:Discussion} 
+Visualisation of tree topology is a central task in phylogenetics, 
+and although numerous tools
+exist~\citep[e.g.][]{huson2007dendroscope,vaughan2017icytree},
+the methods can typically only handle a few hundred nodes.
+Visualisation of large-scale tree topologies with millions of nodes
+requires much more sophisticated approaches
+to capture topological features at different scales, 
+and is active research area~\citep{wong2022dynamic,kramer2023treenome}.
+Adapting such methods, and integrating into \texttt{tsbrowse} to provide
+a local tree viewer that operates at the million-node scale
+is an important direction for future work.
+An interactive viewer for the entire ARG topology, capturing 
+semantic properties of the graph at a range of scales, is an even more 
+ambitious goal, and would be a major asset for the field.
 
 % In current practice, simulated ARGs are used as ground-truth to validate
 % inferences from empirical data
