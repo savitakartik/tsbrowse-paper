@@ -513,7 +513,7 @@ population was set at 0.0001 at the beginning of the sweep. The allele fixed in
 the population at a frequency of 0.9999. The strength of selection was set
 using the selection coefficient, \textit{s = 0.25}. A time increment,
 \textit{dt = 1e-6} was used to step through the sweep. Mutations were added to
-the ARG at a rate of 1e-6. For simulating history before occurrence of the
+the ARG at a rate of 1e-8 per base pair per generation. A recombination rate of 1e-8 per base pair per generation. For simulating history before occurrence of the
 sweep, a standard coalescent model (Hudson's algorithm \citep{Hudson1983}) was
 used until coalescence was achieved.
 
@@ -596,8 +596,8 @@ accompanying repository:
     \centering
     \includegraphics[width=0.95\linewidth]{figures/SuppFig1.png}
     \caption{\textbf{\texttt{tsbrowse} applied to inference methods}
-    A screenshot of \texttt{tsbrowse}'s Edges view for tsinfer+tsdate (A),
-ARG-Needle (B), Relate (C) and SINGER (D) inferences of the truth dataset
+    A screenshot of \texttt{tsbrowse}'s Edges view for tsinfer+tsdate,
+ARG-Needle, Relate and SINGER inferences of the truth dataset
 simulated under a selective sweep model (in Figure 2 of the main text). For
 SINGER, an examplar ARG from the set of output posterior ARG samples is shown.
 The X coordinate represents genomic position, each horizontal segment on the
