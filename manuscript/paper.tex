@@ -71,88 +71,90 @@
 
 \authormark{Karthikeyan et al.}
 
-\address[1]{\orgdiv{Big Data Institute, Li Ka Shing Centre for Health Information and Discovery}, \orgname{University of Oxford}, \orgaddress{\street{Old Road Campus}, \postcode{Oxford OX3 7LF}, \country{United Kingdom}}}
+\address[1]{\orgdiv{Big Data Institute, Li Ka Shing Centre for Health
+        Information and Discovery}, \orgname{University of Oxford},
+    \orgaddress{\street{Old Road Campus}, \postcode{Oxford OX3 7LF},
+        \country{United Kingdom}}}
 
-
-\corresp[$\ast$]{Corresponding author. \href{email:savita.karthikeyan@st-hughs.ox.ac.uk}{savita.karthikeyan@st-hughs.ox.ac.uk}}
+\corresp[$\ast$]{Corresponding author.
+    \href{email:savita.karthikeyan@st-hughs.ox.ac.uk}{savita.karthikeyan@st-hughs.ox.ac.uk}}
 
 \received{Date}{0}{Year}
 \revised{Date}{0}{Year}
 \accepted{Date}{0}{Year}
 
 \abstract{
-%\textbf{Motivation:}
-Ancestral Recombination Graphs (ARGs) represent the interwoven paths of genetic
-ancestry for a set of recombining sequences. The ability to capture the
-evolutionary history of samples makes ARGs valuable in a wide range of
-applications in population and statistical genetics. ARG-based approaches are
-increasingly becoming a part of genetic data analysis pipelines due to
-breakthroughs enabling ARG inference at biobank-scale. However, there is a lack
-of visualisation tools, which are crucial for validating inferences and
-generating hypotheses. 
-%\textbf{Results:} 
-We present \texttt{tsbrowse}, an open-source Python web-app for the interactive
-visualisation of the fundamental building-blocks of ARGs, i.e.,  nodes, edges
-and mutations. We demonstrate the application of \texttt{tsbrowse} to various
-data sources and scenarios, and highlight its key features of browsability
-along the genome, user interactivity, and scalability to very large sample
-sizes.\\ \textbf{Availability:}\\ Python package:
-\texttt{\url{https://pypi.org/project/tsbrowse/}}, \\ Development version:
-\texttt{\url{https://github.com/tskit.dev/tsbrowse}}, \\ Documentation:
-\texttt{\url{https://tskit.dev/tsbrowse/docs/}}\\
-%\textbf{Contact:} \href{name@email.com}{name@email.com}\\
-%\textbf{Supplementary information:} Available at
-%\textit{\textcolor{red}{\href{https://www.google.com}{Bioinformatics}
-%online}.}}
+    %\textbf{Motivation:}
+    Ancestral Recombination Graphs (ARGs) represent the interwoven paths of genetic
+    ancestry for a set of recombining sequences. The ability to capture the
+    evolutionary history of samples makes ARGs valuable in a wide range of
+    applications in population and statistical genetics. ARG-based approaches are
+    increasingly becoming a part of genetic data analysis pipelines due to
+    breakthroughs enabling ARG inference at biobank-scale. However, there is a lack
+    of visualisation tools, which are crucial for validating inferences and
+    generating hypotheses.
+    %\textbf{Results:} 
+    We present \texttt{tsbrowse}, an open-source Python web-app for the interactive
+    visualisation of the fundamental building-blocks of ARGs, i.e.,  nodes, edges
+    and mutations. We demonstrate the application of \texttt{tsbrowse} to various
+    data sources and scenarios, and highlight its key features of browsability
+    along the genome, user interactivity, and scalability to very large sample
+    sizes.\\ \textbf{Availability:}\\ Python package:
+    \texttt{\url{https://pypi.org/project/tsbrowse/}}, \\ Development version:
+    \texttt{\url{https://github.com/tskit.dev/tsbrowse}}, \\ Documentation:
+    \texttt{\url{https://tskit.dev/tsbrowse/docs/}}\\
+    %\textbf{Contact:} \href{name@email.com}{name@email.com}\\
+    %\textbf{Supplementary information:} Available at
+    %\textit{\textcolor{red}{\href{https://www.google.com}{Bioinformatics}
+    %online}.}}
 }
 
 \keywords{Ancestral Recombination Graphs, Holoviz, biobank-scale ARG
-visualisation, genome browser} \maketitle 
+    visualisation, genome browser} \maketitle
 
-\section{Introduction} 
+\section{Introduction}
 Ancestral recombination graphs (ARGs) describe how a set of sample
-sequences relate to each other at each position along the genome in a recombining
-species, and are currently the subject of intense research 
+sequences relate to each other at each position along the genome in a
+recombining
+species, and are currently the subject of intense research
 interest~\citep{brandt2024promise,lewanski2024era,nielsen2024inference,
-wong2024general}. ARGs are a fundamental object in population genetics,
+    wong2024general}. ARGs are a fundamental object in population genetics,
 and although they have been of theoretical interest for
 decades~\citep{Hudson1983,Griffiths1997} it is only with recent breakthroughs
 in inference methods~\citep{rasmussen2014genome,
-speidel2019method,kelleher2019inferring,wohns2022unified,zhang2023biobank,
-gunnarsson2024scalable,deng2024robust} that practical application has 
+    speidel2019method,kelleher2019inferring,wohns2022unified,zhang2023biobank,
+    gunnarsson2024scalable,deng2024robust} that practical application has
 become possible. Varied applications have been recently proposed,
-such as inferring selection~\citep{stern2019approximate,hejase2022deep} and 
-the spatial 
-location of genetic
-ancestors~\citep{osmond2024estimating,deraje2024inferring,grundler2024geographic},
-more powerful approaches to quantifying genetic 
+such as inferring selection~\citep{stern2019approximate,hejase2022deep} and
+the spatial location of genetic ancestors~\citep{osmond2024estimating,deraje2024inferring,grundler2024geographic},
+more powerful approaches to quantifying genetic
 relatedness~\citep{fan2022genealogical,zhang2023biobank,gunnarsson2024scalable,lehmann2025on}
-and other methodological improvements for genome wide association 
+and other methodological improvements for genome wide association
 studies~\citep{nowbandegani2023extremely,link2023tree},
 and the development of machine learning methods using inferred
 ARGs as input~\citep{hejase2022deep,pearson2023local,korfmann2024simultaneous,
-whitehouse2024tree}.
-While these developements are exciting, the performance 
+whitehouse2024tree}. 
+While these developements are exciting, the performance
 of these new methods depend critically on the accuracy of the inferred ARGs,
-and although studies benchmarking the various inference methods on 
-simulated data have emerged 
+and although studies benchmarking the various inference methods on
+simulated data have emerged
 \citep{brandt2022evaluation,deng2024robust,peng2024evaluating},
-the practicalities of applying ARG inference to real data is 
-understudied. In particular, there is a critial lack of software 
-infrastructure to support evaluation and quality control of 
+the practicalities of applying ARG inference to real data is
+understudied. In particular, there is a critial lack of software
+infrastructure to support evaluation and quality control of
 inferred ARGs.
 
 Visualisation is fundamentally important to data analysis.
-Many specialised tools exist to aid the visual analysis and 
+Many specialised tools exist to aid the visual analysis and
 quality control
-of assembly~\citep{wick2015bandage,challis2020blobtoolkit},
+of genome assembly~\citep{wick2015bandage,challis2020blobtoolkit},
 read mapping~\citep{robinson2011integrative},
 and variant
 calling~\citep{robinson2017variant,tollefson2019viva,konig2023divbrowse},
 for example.
-At every stage of a bioinformatics pipeline, it is important to visualise 
+At every stage of a bioinformatics pipeline, it is important to visualise
 results to avoid artefacts and aid understanding of the data.
-Genome browsers such as IGV~\citep{robinson2011integrative} and the 
+Genome browsers such as IGV~\citep{robinson2011integrative} and the
 UCSC Genome Browser~\citep{nassar2023ucsc} integrate many different
 data modalities, and are vital infrastructure for the field.
 % . In the past few decades,
@@ -166,30 +168,28 @@ data modalities, and are vital infrastructure for the field.
 % The data security and scalability offered by this architecture ensures that
 % genome browsers continue to be relevant in the biobank era.
 
-
 There is currently no straightforward means of visually summarising
-ARGs, presenting a significant stumbling block for the nascent 
+ARGs, presenting a significant stumbling block for the nascent
 field of practical ARG inference. Inferred ARGs are essentially opaque,
-with only the most basic numerical summaries (such as numbers 
+with only the most basic numerical summaries (such as numbers
 of nodes, mutations etc) or high-level
-statistics~\citep{ralph2020efficiently} available. While tools 
+statistics~\citep{ralph2020efficiently} available. While tools
 for visualising the local tree topologies exist, they are difficult
-to interpret and do not scale well to large sample sizes. 
+to interpret and do not scale well to large sample sizes.
 To address this gap, we present \texttt{tsbrowse}, a
 % I worry that if we say "genome browser" we'll get stung for not having 
 % deep integration with all sorts of stuff
-client-server application providing genome browser-like 
-functionality for ARGs. 
-It provides interactive visualisations of the information structure 
-of ARGs, smoothly scrolling from chromosome-level views down to 
-individual nodes, edges and mutations. Supporting very large ARGs is a 
+client-server application providing genome browser-like
+functionality for ARGs.
+It provides interactive visualisations of the information structure
+of ARGs, smoothly scrolling from chromosome-level views down to
+individual nodes, edges and mutations. Supporting very large ARGs is a
 particular focus for \texttt{tsbrowse}, as millions of genome
 sequences have been sampled for several
 species~\citep{cesarani2022multibreed,stark2024call,hunt2024addressing}
-and ARGs of this scale are a particular focus of ongoing 
+and ARGs of this scale are a particular focus of ongoing
 research~\citep{kelleher2019inferring,zhang2023biobank,
-zhan2023towards,anderson2023on,gunnarsson2024scalable}.
-
+    zhan2023towards,anderson2023on,gunnarsson2024scalable}.
 
 % \citep{Kelleher2019,Speidel2019,Zhang2023,Gunnarsson2024.08.31.610248,Deng2024.03.16.585351}.
 
@@ -201,39 +201,38 @@ zhan2023towards,anderson2023on,gunnarsson2024scalable}.
 % for performing quality control and exploratory analyses on ARGs inferred from
 % biobank datasets. 
 
-
-\section{Results} 
+\section{Results}
 
 \begin{figure} \centering
-\includegraphics[width=0.95\linewidth]{figures/MainFig1.png}
-\caption{\textbf{Overview of tsbrowse architecture. } In tskit, ARGs are
-defined by a collection of tables. Exemplar
-table names are denoted in dark blue and columns that describe the property in
-light blue. In the pre-process step, tables are augmented with additional
-information computed for each property (yellow). The output from this
-pre-processing step is stored as a \texttt{.tsbrowse} file. Next the serve step
-renders the visualisation in a web browser by leveraging tools in the Holoviz
-ecosystem. Optional annotations are provided as an input file, allowing users
-to overlay contextual information about genes or other sequence features. }
-\label{fig:Figure_1} \end{figure}
+    \includegraphics[width=0.95\linewidth]{figures/MainFig1.png}
+    \caption{\textbf{Overview of tsbrowse architecture. } In tskit, ARGs are
+        defined by a collection of tables. Exemplar
+        table names are denoted in dark blue and columns that describe the property in
+        light blue. In the pre-process step, tables are augmented with additional
+        information computed for each property (yellow). The output from this
+        pre-processing step is stored as a \texttt{.tsbrowse} file. Next the serve step
+        renders the visualisation in a web browser by leveraging tools in the Holoviz
+        ecosystem. Optional annotations are provided as an input file, allowing users
+        to overlay contextual information about genes or other sequence features. }
+    \label{fig:Figure_1} \end{figure}
 
-\subsection{Data model} \label{subsec:Data_Model} 
-\texttt{Tsbrowse} uses the ``succinct tree sequence'' encoding of 
-ARGS~\citep{wong2024general}. This efficient ARG encoding 
-is implemented by the 
+\subsection{Data model} \label{subsec:Data_Model}
+\texttt{Tsbrowse} uses the ``succinct tree sequence'' encoding of
+ARGS~\citep{wong2024general}. This efficient ARG encoding
+is implemented by the
 \texttt{tskit} library~\citep{ralph2020efficiently}
 and supported by most modern ARG
 simulation~\citep{kelleher2016efficient,kelleher2018efficient,
-haller2019tree,baumdicker2022efficient,
-adrion2020community,lauterbur2023expanding,korfmann2023weak,
-tsambos2023link,tagami2024tstrait},
+    haller2019tree,baumdicker2022efficient,
+    adrion2020community,lauterbur2023expanding,korfmann2023weak,
+    tsambos2023link,tagami2024tstrait},
 inference~\citep{kelleher2019inferring,speidel2019method,wohns2022unified,
-mahmoudi2022bayesian,zhan2023towards,zhang2023biobank,deng2025general},
+    mahmoudi2022bayesian,zhan2023towards,zhang2023biobank,deng2025general},
 and processing methods~\citep{fan2022genealogical,nowbandegani2023extremely}.
 In \texttt{tskit}, ARGs are encoded as a
-collection of tables, storing information about the 
-nodes and edges that describe the graph topology and the sites 
-and mutations encoding the sequence variation (Fig.~\ref{fig:Figure_1}).
+collection of tables, storing information about the
+nodes and edges that describe the graph topology and the sites
+and mutations that encode the sequence variation (Fig.~\ref{fig:Figure_1}).
 % For example, the Node table describes sampled or ancestral sequences
 % and records their time of birth, and the individual and population they belong
 % to. The Edge table describes the relationship between pairs of nodes, and
@@ -247,39 +246,40 @@ and mutations encoding the sequence variation (Fig.~\ref{fig:Figure_1}).
 % sequence variation contained in the samples. 
 % (see \hyperref[subsec:User_Interface]{User Interface}). 
 
-\subsection{Architecture} 
-\texttt{Tsbrowse} is a modular client-server application 
+\subsection{Architecture}
+\texttt{Tsbrowse} is a modular client-server application
 written in Python, optimised for ARGs with millions
-of samples (Fig.~\ref{fig:Figure_1}). 
+of samples (Fig.~\ref{fig:Figure_1}).
 The application has two basic commands: \texttt{preprocess}
-and \texttt{serve}. The \texttt{preprocess} command 
-takes an input ARG file and augments the \texttt{tskit} 
+and \texttt{serve}. The \texttt{preprocess} command
+takes an input ARG file and augments the \texttt{tskit}
 tables with additional columns,
 precomputing all the information required for visualisation,
 and storing as a compressed \texttt{.tsbrowse} file.
-(The \texttt{.tsbrowse} file is also a valid input for 
+(The \texttt{.tsbrowse} file is also a valid input for
 \texttt{tszip}, a general utility for compressing \texttt{tskit}
 files.)
-To visualise an ARG we then run \texttt{tsbrowse serve}, which 
-by default will open a browser window on the local machine, but 
-also supports running the server on a remote machine across the 
+To visualise an ARG we then run \texttt{tsbrowse serve}, which
+by default will open a browser window on the local machine, but
+also supports running the server on a remote machine across the
 network.
 This client-server architecture has some important advantages over
 a monolithic single-machine approach. Most importantly,
-the ARG being visualised remains in-situ and does not need to be 
-downloaded from the server. 
+the ARG being visualised remains in-situ and does not need to be
+downloaded from the server.
 
 The goal of \texttt{tsbrowse} is to provide interpretable
-and interactive visual summaries of ARGs containing millions of nodes, edges 
+and interactive visual summaries of ARGs containing millions of nodes, edges
 and mutations. Mutations, for example, have a clear interpretation
-when plotted on genome coordinate vs time axes, but at this scale 
+when plotted on genome coordinate vs time axes, but at this scale
 the data density is far too high to simply plot each mutation as a point.
-We overcome this problem by using Datashader and the wider 
+We overcome this problem by using Datashader and the wider
 Holoviz ecosystem~\citep{Holoviz}, which efficiently rasterises large datasets
 at the requested resolution on the server, sends the image to the web-browser
-for display, and dynamically updates as the user interatively navigates the ARG.
+for display, and dynamically updates as the user interactively navigates the
+ARG.
 This approach allows us to summarise very large ARGs interactively;
-Fig~\ref{fig:Supplementary_Figure_4}, for example, shows a screenshot of 
+Fig~\ref{fig:Supplementary_Figure_4}, for example, shows a screenshot of
 \texttt{tsbrowse} summarising the 1.9 million mutations in a SARS-CoV-2
 ARG with around 2.7 million nodes and edges.
 
@@ -323,16 +323,18 @@ ARG with around 2.7 million nodes and edges.
 % experience.
 
 \subsection{User Interface} \label{subsec:User_Interface} \begin{figure}
-\centering \includegraphics[width=0.95\linewidth]{figures/MainFig2.png}
-\caption{Screenshot of the Edges tab in \texttt{tsbrowse}.
-Visualisation of the edges in a simulated ARG with a strong selective
-sweep in the middle of the genome (see Supplement for details).
-Edges are shown in the main browser pane on the left, with additional
-histograms summarising the edges on the right.
-The effect of the sweep can be seen by the lack of edges crossing the 
-centre of the simulated chromosome. Other tabs are accessed by the 
-buttons on the top bar.
-\label{fig:Figure_2}}
+    \centering \includegraphics[width=0.95\linewidth]{figures/MainFig2.png}
+    \caption{Screenshot of the Edges tab in \texttt{tsbrowse}.
+        Visualisation of the edges in a simulated ARG with a strong selective
+        sweep in the middle of the genome (see Supplement for details).
+        Edges are shown in the main browser pane on the left, with additional
+        histograms summarising the edges on the right.
+        The effect of the sweep can be seen by the lack of edges crossing the
+        centre of the simulated chromosome due to an excess of recent coalescent
+        events. Moving away from the focal site, the oldest edges are the
+        first to rejoin the ARG, followed by more recent edges, resulting in a
+        wedge-like pattern of missing edges in the centre.
+        \label{fig:Figure_2}}
 \end{figure}
 % \texttt{Tsbrowse}'s interface is built on the \texttt{Holoviz} ecosystem
 % \citep{Holoviz}, which brings together \texttt{Datashader}, \texttt{Bokeh},
@@ -348,64 +350,64 @@ buttons on the top bar.
 % sequence annotations. This allows users to overlay contextual information about
 % genes or other sequence features. 
 The user interface is presented as a dashboard, with pages to
-describe various aspects of the ARG. 
+describe various aspects of the ARG.
 Figure~\ref{fig:Figure_2}
-demonstrates the user interface using the Edges page as an example. 
-The plot on the left is an overview of the 33,929 edges 
-(parent-child relationships between nodes along the genome)
+demonstrates the user interface using the Edges page as an example.
+The plot on the left is an overview of the 33,929 edges
 in a simulated ARG with a strong selective sweep (see
 Sec.~\ref{subsec:sweep_simulation} for details).
-Each edge is depicted as a horizontal line connecting the genomic coordinates of the
-parent and child nodes on the x-axis, and the y-axis shows the time of 
+Each edge is depicted as a horizontal line connecting the genomic coordinates
+of the
+parent and child nodes on the x-axis, and the y-axis shows the time of
 either the parent or the child, as chosen by the user.
 The user can interact with the main ``genome browser'' window
 using a set of controls on the top-right corner (provided by Bokeh),
 allowing the user to pan and zoom as required. The histograms to the
 right then summarise the edges as depicted in the browser window.
-A similar browser interface is provided for 
+A similar browser interface is provided for
 nodes
-(e.g. Fig~\ref{fig:Supplementary_Figure_3}) 
-and mutations 
+(e.g. Fig~\ref{fig:Supplementary_Figure_3})
+and mutations
 (e.g. Fig~\ref{fig:Supplementary_Figure_4}).
 \texttt{Tsbrowse} also provides an interactive table viewer with flexible
-search and sorting utilities, which is a valuable debugging utility for 
+search and sorting utilities, which is a valuable debugging utility for
 developers.
 
 %The ability to explore ARG properties across the sequence and interact with the data makes the analysis of local genealogical patterns more intuitive.
 
 \subsection{Applications}
-The purpose of \texttt{tsbrowse} is to provide an interactive view of the 
-\texttt{tskit} ARG data model to guide intuition, improve inference quality control
-and facilitate debugging. An example of how we can deepen our understanding
+The purpose of \texttt{tsbrowse} is to provide an interactive view of the
+\texttt{tskit} ARG data model to guide intuition, improve inference quality
+control and facilitate debugging. An example of how we can deepen our understanding
 using the genome-browser-like perspective provided by \texttt{tsbrowse}
-is provided the simulated ARG of Fig~\ref{fig:Figure_2}, where 
+is given in the simulated ARG of Fig~\ref{fig:Figure_2}, where
 the gap in the edges view corresponds to the characteristic dip in diversity
 of a selective sweep. Comparing this ground truth to the ARGs inferred
 by four different inference methods in Fig~\ref{fig:Supplementary_Figure_1},
 we can see that there are substantial qualitative differences between the
-results. These differences in ancestral haplotypes illustrated by 
+results. These differences in ancestral haplotypes illustrated by
 the edges view are unlikely to be captured by the tree-by-tree distance
 metrics usually used to evaluate
 inference methods~\citep[e.g.][]{kelleher2019inferring,zhang2023biobank},
 providing further motivation for new and improved ways to compare
 simulated and inferred ARGs~\citep{fritze2024forest}.
 
-Interest in ARG-based methods is burgeoning, but the methods are new 
+Interest in ARG-based methods is burgeoning, but the methods are new
 and practical guidance on applying inferences to real data is lacking.
-Data filtering is essential, and the effects of the 
+Data filtering is essential, and the effects of the
 choices that must be made along any bioinformatics pipeline on the final
 ARG are hard to predict and quantify. \texttt{Tsbrowse} was primarily
 developed as a way to quickly visualise the effects of such filtering
 choices on ARGs inferred by \texttt{tsinfer}, and it is now an indispensible
-element of the inference pipeline. Fig~\ref{fig:Supplementary_Figure_2} 
-shows [a before and after view for 1000G data, where tsbrowse helped 
-diagnose and resolve an opaque data problem].
+element of the inference pipeline. Fig~\ref{fig:Supplementary_Figure_2}
+shows [a before and after view for 1000G data, where tsbrowse helped diagnose 
+and resolve an opaque data problem].
 These interactive visualisations have also helped diagnose issues with
-the \texttt{tsinfer} inference algorithm. 
-Fig~\ref{fig:Supplementary_Figure_3} shows the genomic spans of 
-ancestral nodes in an ARG inferred with \texttt{tsinfer}, demonstrating a clear 
-excess of long haplotypes in the very ancient past. These insights 
-have helped guide development and 
+the \texttt{tsinfer} inference algorithm.
+Fig~\ref{fig:Supplementary_Figure_3} shows the genomic spans of
+ancestral nodes in an ARG inferred with \texttt{tsinfer}, demonstrating a clear
+excess of long haplotypes in the very ancient past. These insights
+have helped guide development and
 may lead to significant improvements in performance.
 
 % . Population genetics theory predicts that IBD
@@ -414,7 +416,6 @@ may lead to significant improvements in performance.
 % \textit{y \textgreater{0.8}}, the plot reveals a pattern of node spans contrary
 % to this expectation. It confirms a known algorithmic artefact due to which
 % disproportionately long old ancestors are generated.
-
 
 % We demonstrate a further application of tsbrowse in validating inferences
 % (Supplementary Figures 
@@ -445,20 +446,20 @@ may lead to significant improvements in performance.
 % sample nodes carrying the mutation) is displayed on mouse-over of individual
 % data points.
 
-\section{Discussion} \label{sec:Discussion} 
-Visualisation of tree topology is a central task in phylogenetics, 
+\section{Discussion} \label{sec:Discussion}
+Visualisation of tree topology is a central task in phylogenetics,
 and although numerous tools
 exist~\citep[e.g.][]{huson2007dendroscope,vaughan2017icytree},
 the methods can typically only handle a few hundred nodes.
 Visualisation of large-scale tree topologies with millions of nodes
 requires much more sophisticated approaches
-to capture topological features at different scales, 
-and is active research area~\citep{wong2022dynamic,kramer2023treenome}.
+to capture topological features at different scales,
+and is an active research area~\citep{wong2022dynamic,kramer2023treenome}.
 Adapting such methods, and integrating into \texttt{tsbrowse} to provide
 a local tree viewer that operates at the million-node scale
 is an important direction for future work.
-An interactive viewer for the entire ARG topology, capturing 
-semantic properties of the graph at a range of scales, is an even more 
+An interactive viewer for the entire ARG topology, capturing
+semantic properties of the graph at a range of scales, is an even more
 ambitious goal, and would be a major asset for the field.
 
 % In current practice, simulated ARGs are used as ground-truth to validate
@@ -486,7 +487,8 @@ ambitious goal, and would be a major asset for the field.
 \section*{Funding}
 This work was supported by funding from the Biotechnology and Biological
 Sciences Research Council (UKRI-BBSRC) [grant number BB/T008784/1],
-\textcolor{red}{add Novo funding and funding details for Duncan}. DMR is funded by 
+\textcolor{red}{add Novo funding and funding details for Duncan}. DMR is funded
+by
 a studentship from the Wellcome Programme in Genomic Medicine and Statistics.
 JK acknowledges EPSRC (research grant EP/X024881/1),
 NIH (research grants HG011395 and HG012473)
@@ -495,12 +497,14 @@ and the Robertson Foundation.
 \bibliographystyle{natbib}
 \bibliography{reference}
 
-\clearpage \onecolumn \setcounter{figure}{0}  % Reset the figure counter
-\renewcommand{\thefigure}{S\arabic{figure}}  
+\clearpage \onecolumn \setcounter{figure}{0}
+% Reset the figure counter
+\renewcommand{\thefigure}{S\arabic{figure}}
 % Change figure numbering to S1, S2, etc. 
 
-\section{Supplementary Material} 
-\subsection{Simulation of truth dataset (Fig. \ref{fig:Figure_2})} \label{subsec:sweep_simulation} 
+\section{Supplementary Material}
+\subsection{Simulation of truth dataset (Fig. \ref{fig:Figure_2})}
+\label{subsec:sweep_simulation}
 Ancestral
 histories of 300 samples were simulated with \texttt{SweepGenicSelection}
 function in \texttt{msprime (version 1.3.3)}. A combination of models was used:
@@ -512,27 +516,27 @@ using the selection coefficient, \textit{s = 0.25}. A time increment,
 \textit{dt = 1e-6} was used to step through the sweep. Mutations were added to
 the ARG at a rate of 1e-6. For simulating history before occurrence of the
 sweep, a standard coalescent model (Hudson's algorithm \citep{Hudson1983}) was
-used until coalescence was achieved. 
+used until coalescence was achieved.
 
 \subsection{Inference of selective sweep dataset (Suppl. Fig.
-\ref{fig:Supplementary_Figure_1})} The following software were used to infer
+    \ref{fig:Supplementary_Figure_1})} The following software were used to infer
 ARGs from the truth dataset described above: \texttt{tsinfer version 0.3.3}
-\citep{kelleher2019inferring}, \texttt{tsdate version 0.2.1}, 
-\texttt{Relate version 1.2.2} \cite{speidel2019method}, 
+\citep{kelleher2019inferring}, \texttt{tsdate version 0.2.1},
+\texttt{Relate version 1.2.2} \cite{speidel2019method},
 \texttt{ARG-needle version 1.0.3} \citep{zhang2023biobank},
-\texttt{SINGER version 0.1.8-beta} \citep{deng2024robust}. 
+\texttt{SINGER version 0.1.8-beta} \citep{deng2024robust}.
 For all
 methods, the following parameters of inference were used: \textit{recombination
-rate = 1e-8}, \textit{mutation rate = 1e-8}, \textit{effective population size
-= 10,000}. Default values were used for all other inference parameters.
+    rate = 1e-8}, \textit{mutation rate = 1e-8}, \textit{effective population size
+    = 10,000}. Default values were used for all other inference parameters.
 
 \subsection{Inference of 1000 Genomes dataset (Suppl. Fig.
-\ref{fig:Supplementary_Figure_2}, Suppl. Fig.
-\ref{fig:Supplementary_Figure_3})} The 1000 Genomes dataset was downloaded from
+    \ref{fig:Supplementary_Figure_2}, Suppl. Fig.
+    \ref{fig:Supplementary_Figure_3})} The 1000 Genomes dataset was downloaded from
 \textcolor{red}{[insert link]}. Ancestral fasta sequence for chromosome 20
 (GRCh38) was downloaded from the Ensembl database. Inference was performed with
 a Snakemake pipeline \textcolor{red}{(cite Ben's repo?)} using \texttt{tsinfer
-version 0.3.3} for the long arm of chromosome 20 after filtering out duplicate
+    version 0.3.3} for the long arm of chromosome 20 after filtering out duplicate
 variant positions, variants with missing or low quality ancestral allele,
 singletons, n-1-tons and n-2-tons. Only bi-allelic SNPs were included for
 inference. For the inference in Suppl. Fig. 2A, all genomic regions were
@@ -540,12 +544,12 @@ included. For the inference in Suppl. Figs 2B and 3, genomic regions with a
 site density lesser than 5 per kb were discarded. For Suppl. Fig. 2,
 \texttt{tsdate version 0.2.1} was used to estimate the age of ancestral nodes
 with \textit{mutation rate = 1.29e-8}, setting all other parameters to default
-values. 
+values.
 
 \subsection{Inference of SARS-CoV-2 ARGs}
 The ARG shown in Fig \ref{fig:Supplementary_Figure_4} was inferred with
 \texttt{sc2ts}~\citep{zhang2023biobank} using the Viridian
-dataset~\citep{hunt2024addressing}. It consists of 
+dataset~\citep{hunt2024addressing}. It consists of
 2,482,157 samples
 2,689,054 nodes,
 2,689,982 edges
@@ -591,13 +595,13 @@ accompanying repository:
     \centering
     \includegraphics[width=0.95\linewidth]{figures/SuppFig1.png}
     \caption{\textbf{\texttt{tsbrowse} applied to inference methods}
-    A screenshot of \texttt{tsbrowse}'s Edges view for tsinfer+tsdate (A),
-ARG-Needle (B), Relate (C) and SINGER (4) inferences of the truth dataset
-simulated under a selective sweep model (in Figure 2 of the main text). For
-SINGER, an examplar ARG from the set of output posterior ARG samples is shown.
-The X coordinate represents genomic position, each horizontal segment on the
-plot shows the genomic coordinates that the edge spans, and Y coordinate shows
-time of either the parent or child node in the edge.}
+        A screenshot of \texttt{tsbrowse}'s Edges view for tsinfer+tsdate (A),
+        ARG-Needle (B), Relate (C) and SINGER (4) inferences of the truth dataset
+        simulated under a selective sweep model (in Figure 2 of the main text). For
+        SINGER, an examplar ARG from the set of output posterior ARG samples is shown.
+        The X coordinate represents genomic position, each horizontal segment on the
+        plot shows the genomic coordinates that the edge spans, and Y coordinate shows
+        time of either the parent or child node in the edge.}
     \label{fig:Supplementary_Figure_1}
 \end{figure}
 
@@ -605,12 +609,12 @@ time of either the parent or child node in the edge.}
     \centering
     % \includegraphics[width=0.95\linewidth]{figures/SuppFig2.png}
     \caption{\textbf{A view of mutations in the 1000G WGS dataset.} A
-screenshot of \texttt{tsbrowse}'s Mutations view for a X Mb region on
-chromosome 17 inferred from from 3,202 participants from the 1000 Genomes Whole
-Genome Sequencing dataset (1000G) \citep{1000G2015, 1000GWGS}. The genomic
-position of the mutations is shown on the X axis, and the age of mutation is
-represented on the Y axis. Panel B represents an inference after filtering out
-low site-density regions in the samples.}
+        screenshot of \texttt{tsbrowse}'s Mutations view for a X Mb region on
+        chromosome 17 inferred from from 3,202 participants from the 1000 Genomes Whole
+        Genome Sequencing dataset (1000G) \citep{1000G2015, 1000GWGS}. The genomic
+        position of the mutations is shown on the X axis, and the age of mutation is
+        represented on the Y axis. Panel B represents an inference after filtering out
+        low site-density regions in the samples.}
     \label{fig:Supplementary_Figure_2}
 \end{figure}
 
@@ -618,11 +622,11 @@ low site-density regions in the samples.}
     \centering
     \includegraphics[width=0.95\linewidth]{figures/SuppFig3.png}
     \caption{\textbf{A view of the Nodes page for a 1000 Genomes inference.} A
-screenshot of \texttt{tsbrowse}'s Nodes view for an inference of the long arm
-of chromosome 20 from the 1000 Genomes whole-genome sequencing dataset. At the
-top is a plot of node spans over time. The length of sequence that the nodes
-span is shown on the X axis, and the time of nodes is shown on the Y axis. The
-histogram at the bottom shows the distribution of node spans. }
+        screenshot of \texttt{tsbrowse}'s Nodes view for an inference of the long arm
+        of chromosome 20 from the 1000 Genomes whole-genome sequencing dataset. At the
+        top is a plot of node spans over time. The length of sequence that the nodes
+        span is shown on the X axis, and the time of nodes is shown on the Y axis. The
+        histogram at the bottom shows the distribution of node spans. }
     \label{fig:Supplementary_Figure_3}
 \end{figure}
 
@@ -630,10 +634,10 @@ histogram at the bottom shows the distribution of node spans. }
     \centering
     \includegraphics[width=0.95\linewidth]{figures/SuppFig4.png}
     \caption{\textbf{\texttt{tsbrowse} applied to SARS-CoV-2 ARGs.}
-    A screenshot of \texttt{tsbrowse}'s depiction of 
-    1,923,169 mutations in an
-    ARG inferred by \texttt{sc2ts}; see  text for details. Also shown are the 
-    gene annotations along the X-axis.}
+        A screenshot of \texttt{tsbrowse}'s depiction of
+        1,923,169 mutations in an
+        ARG inferred by \texttt{sc2ts}; see  text for details. Also shown are the
+        gene annotations along the X-axis.}
     \label{fig:Supplementary_Figure_4}
 \end{figure}
 \end{document}
