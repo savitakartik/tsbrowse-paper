@@ -133,15 +133,15 @@ and other methodological improvements for genome wide association
 studies~\citep{nowbandegani2023extremely,link2023tree},
 and the development of machine learning methods using inferred
 ARGs as input~\citep{hejase2022deep,pearson2023local,korfmann2024simultaneous,
-whitehouse2024tree}. 
-While these developements are exciting, the performance
-of these new methods depend critically on the accuracy of the inferred ARGs,
-and although studies benchmarking the various inference methods on
-simulated data have emerged
+whitehouse2024tree}.
+While these developements are exciting, the performance 
+of these new methods depends critically on the accuracy of the inferred ARGs.
+Although studies benchmarking the various inference methods on 
+simulated data have emerged 
 \citep{brandt2022evaluation,deng2024robust,peng2024evaluating},
-the practicalities of applying ARG inference to real data is
-understudied. In particular, there is a critial lack of software
-infrastructure to support evaluation and quality control of
+the practicalities of applying ARG inference to real data is 
+understudied. In particular, there is a critical lack of software 
+infrastructure to support evaluation and quality control of 
 inferred ARGs.
 
 Visualisation is fundamentally important to data analysis.
@@ -216,10 +216,10 @@ research~\citep{kelleher2019inferring,zhang2023biobank,
         to overlay contextual information about genes or other sequence features. }
     \label{fig:Figure_1} \end{figure}
 
-\subsection{Data model} \label{subsec:Data_Model}
-\texttt{Tsbrowse} uses the ``succinct tree sequence'' encoding of
-ARGS~\citep{wong2024general}. This efficient ARG encoding
-is implemented by the
+\subsection{Data model} \label{subsec:Data_Model} 
+\texttt{Tsbrowse} uses the ``succinct tree sequence'' encoding of 
+ARGs~\citep{wong2024general}. This efficient ARG encoding 
+is implemented by the 
 \texttt{tskit} library~\citep{ralph2020efficiently}
 and supported by most modern ARG
 simulation~\citep{kelleher2016efficient,kelleher2018efficient,
@@ -398,10 +398,10 @@ Data filtering is essential, and the effects of the
 choices that must be made along any bioinformatics pipeline on the final
 ARG are hard to predict and quantify. \texttt{Tsbrowse} was primarily
 developed as a way to quickly visualise the effects of such filtering
-choices on ARGs inferred by \texttt{tsinfer}, and it is now an indispensible
-element of the inference pipeline. Fig~\ref{fig:Supplementary_Figure_2}
-shows [a before and after view for 1000G data, where tsbrowse helped diagnose 
-and resolve an opaque data problem].
+choices on ARGs inferred by \texttt{tsinfer}, and it is now an indispensable
+element of the inference pipeline. Fig~\ref{fig:Supplementary_Figure_2} 
+shows a region of the 1000G data with gaps in site density that are spanned by
+ exceptionally long edges, which are likely to bias downstream statistics.
 These interactive visualisations have also helped diagnose issues with
 the \texttt{tsinfer} inference algorithm.
 Fig~\ref{fig:Supplementary_Figure_3} shows the genomic spans of
@@ -487,8 +487,7 @@ ambitious goal, and would be a major asset for the field.
 \section*{Funding}
 This work was supported by funding from the Biotechnology and Biological
 Sciences Research Council (UKRI-BBSRC) [grant number BB/T008784/1],
-\textcolor{red}{add Novo funding and funding details for Duncan}. DMR is funded
-by
+\textcolor{red}{add Novo funding}. DMR is funded by 
 a studentship from the Wellcome Programme in Genomic Medicine and Statistics.
 JK acknowledges EPSRC (research grant EP/X024881/1),
 NIH (research grants HG011395 and HG012473)
@@ -521,8 +520,8 @@ used until coalescence was achieved.
 \subsection{Inference of selective sweep dataset (Suppl. Fig.
     \ref{fig:Supplementary_Figure_1})} The following software were used to infer
 ARGs from the truth dataset described above: \texttt{tsinfer version 0.3.3}
-\citep{kelleher2019inferring}, \texttt{tsdate version 0.2.1},
-\texttt{Relate version 1.2.2} \cite{speidel2019method},
+\citep{kelleher2019inferring}, \texttt{tsdate version 0.2.1}, 
+\texttt{Relate version 1.2.2} \citep{speidel2019method}, 
 \texttt{ARG-needle version 1.0.3} \citep{zhang2023biobank},
 \texttt{SINGER version 0.1.8-beta} \citep{deng2024robust}.
 For all
@@ -531,20 +530,21 @@ methods, the following parameters of inference were used: \textit{recombination
     = 10,000}. Default values were used for all other inference parameters.
 
 \subsection{Inference of 1000 Genomes dataset (Suppl. Fig.
-    \ref{fig:Supplementary_Figure_2}, Suppl. Fig.
-    \ref{fig:Supplementary_Figure_3})} The 1000 Genomes dataset was downloaded from
-\textcolor{red}{[insert link]}. Ancestral fasta sequence for chromosome 20
-(GRCh38) was downloaded from the Ensembl database. Inference was performed with
-a Snakemake pipeline \textcolor{red}{(cite Ben's repo?)} using \texttt{tsinfer
-    version 0.3.3} for the long arm of chromosome 20 after filtering out duplicate
-variant positions, variants with missing or low quality ancestral allele,
-singletons, n-1-tons and n-2-tons. Only bi-allelic SNPs were included for
-inference. For the inference in Suppl. Fig. 2A, all genomic regions were
-included. For the inference in Suppl. Figs 2B and 3, genomic regions with a
-site density lesser than 5 per kb were discarded. For Suppl. Fig. 2,
-\texttt{tsdate version 0.2.1} was used to estimate the age of ancestral nodes
-with \textit{mutation rate = 1.29e-8}, setting all other parameters to default
-values.
+\ref{fig:Supplementary_Figure_2}, Suppl. Fig.
+\ref{fig:Supplementary_Figure_3})} The 1000 Genomes dataset was downloaded from
+\texttt{\url{https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20220422_3202_phased_SNV_INDEL_SV/}}.
+Ancestral fasta sequences for chromosomes 17 and 20 (GRCh38) were downloaded
+from the Ensembl database. Inference was performed with a Snakemake pipeline
+(\texttt{\url{https://github.com/benjeffery/tsinfer-snakemake/}}) using
+\texttt{tsinfer version 0.3.3} for the long arms of chromosome 17 and 20 after
+filtering out duplicate variant positions, variants with missing or low quality
+ancestral allele, singletons, n-1-tons and n-2-tons. Only bi-allelic SNPs were
+included for inference. For the inference in Suppl. Fig. 2, all genomic regions
+were included. For the inference in Suppl. Fig. 3, genomic regions with a site
+density lesser than 5 per kb were discarded. For Suppl. Fig. 2, \texttt{tsdate
+version 0.2.1} was used to estimate the age of ancestral nodes with
+\textit{mutation rate = 1.29e-8}, setting all other parameters to default
+values. 
 
 \subsection{Inference of SARS-CoV-2 ARGs}
 The ARG shown in Fig \ref{fig:Supplementary_Figure_4} was inferred with
@@ -595,26 +595,25 @@ accompanying repository:
     \centering
     \includegraphics[width=0.95\linewidth]{figures/SuppFig1.png}
     \caption{\textbf{\texttt{tsbrowse} applied to inference methods}
-        A screenshot of \texttt{tsbrowse}'s Edges view for tsinfer+tsdate (A),
-        ARG-Needle (B), Relate (C) and SINGER (4) inferences of the truth dataset
-        simulated under a selective sweep model (in Figure 2 of the main text). For
-        SINGER, an examplar ARG from the set of output posterior ARG samples is shown.
-        The X coordinate represents genomic position, each horizontal segment on the
-        plot shows the genomic coordinates that the edge spans, and Y coordinate shows
-        time of either the parent or child node in the edge.}
+    A screenshot of \texttt{tsbrowse}'s Edges view for tsinfer+tsdate (A),
+ARG-Needle (B), Relate (C) and SINGER (D) inferences of the truth dataset
+simulated under a selective sweep model (in Figure 2 of the main text). For
+SINGER, an examplar ARG from the set of output posterior ARG samples is shown.
+The X coordinate represents genomic position, each horizontal segment on the
+plot shows the genomic coordinates that the edge spans, and Y coordinate shows
+time of either the parent or child node in the edge.}
     \label{fig:Supplementary_Figure_1}
 \end{figure}
 
 \begin{figure}
     \centering
-    % \includegraphics[width=0.95\linewidth]{figures/SuppFig2.png}
-    \caption{\textbf{A view of mutations in the 1000G WGS dataset.} A
-        screenshot of \texttt{tsbrowse}'s Mutations view for a X Mb region on
-        chromosome 17 inferred from from 3,202 participants from the 1000 Genomes Whole
-        Genome Sequencing dataset (1000G) \citep{1000G2015, 1000GWGS}. The genomic
-        position of the mutations is shown on the X axis, and the age of mutation is
-        represented on the Y axis. Panel B represents an inference after filtering out
-        low site-density regions in the samples.}
+    \includegraphics[width=0.95\linewidth]{figures/SuppFig2.png}
+    \caption{\textbf{Identifying ARG inference problems with \texttt{tsbrowse}} 
+Screenshots of \texttt{tsbrowse}'s Mutations view (A) and Edges view (B) for a
+ 600 kB region of chromosome 17 inferred from 3,202 participants from the 1000 
+ Genomes Whole Genome Sequencing dataset (1000G) \citep{1000G2015, 1000GWGS}. 
+ The poor performance of \texttt{tsinfer} in this variant-poor region is evidenced
+  by the long edges spanning gaps in mutation density.}
     \label{fig:Supplementary_Figure_2}
 \end{figure}
 
