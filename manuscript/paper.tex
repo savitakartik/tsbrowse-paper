@@ -532,19 +532,16 @@ methods, the following parameters of inference were used: \textit{recombination
 \ref{fig:Supplementary_Figure_2}, Suppl. Fig.
 \ref{fig:Supplementary_Figure_3})} The 1000 Genomes dataset was downloaded from
 \texttt{\url{https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20220422_3202_phased_SNV_INDEL_SV/}}.
-Ancestral fasta sequences for chromosomes 17 and 20 (GRCh38) were downloaded
+The ancestral fasta sequence for chromosome 17 (GRCh38) was downloaded
 from the Ensembl database. Inference was performed with a Snakemake pipeline
 (\texttt{\url{https://github.com/benjeffery/tsinfer-snakemake/}}) using
-\texttt{tsinfer version 0.3.3} for the long arms of chromosome 17 and 20 after
+\texttt{tsinfer version 0.3.3} for the long arm of chromosome 17 after
 filtering out duplicate variant positions, variants with missing or low quality
 ancestral allele, singletons, n-1-tons and n-2-tons. Only bi-allelic SNPs were
-included for inference. For the inference in Suppl. Fig.
-\ref{fig:Supplementary_Figure_2}, all genomic regions were included. For the
-inference in Suppl. Fig. \ref{fig:Supplementary_Figure_3}, genomic regions with
-a site density lesser than 5 per kb were discarded. For Suppl. Fig.
-\ref{fig:Supplementary_Figure_2}, \texttt{tsdate version 0.2.1} was used to
-estimate the age of ancestral nodes with \textit{mutation rate = 1.29e-8},
-setting all other parameters to default values. 
+included for inference. For Suppl. Fig. \ref{fig:Supplementary_Figure_2}, 
+\texttt{tsdate version 0.2.1} was used to estimate the age of ancestral nodes
+ with \textit{mutation rate = 1.29e-8}, setting all other parameters to default 
+ values. 
 
 \subsection{Inference of SARS-CoV-2 ARGs}
 The ARG shown in Fig \ref{fig:Supplementary_Figure_4} was inferred with
@@ -622,7 +619,7 @@ Screenshots of \texttt{tsbrowse}'s Mutations view (A) and Edges view (B) for a
     \includegraphics[width=0.95\linewidth]{figures/SuppFig3.png}
     \caption{\textbf{A view of the Nodes page for a 1000 Genomes inference.} A
         screenshot of \texttt{tsbrowse}'s Nodes view for an inference of the long arm
-        of chromosome 20 from the 1000 Genomes whole-genome sequencing dataset. At the
+        of chromosome 17 from the 1000 Genomes whole-genome sequencing dataset. At the
         top is a plot of node spans over time. The length of sequence that the nodes
         span is shown on the X axis, and the time of nodes is shown on the Y axis. The
         histogram at the bottom shows the distribution of node spans. }
