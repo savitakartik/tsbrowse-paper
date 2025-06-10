@@ -117,13 +117,32 @@ sequences relate to each other at each position along the genome in a
 recombining
 species, and are currently the subject of intense research
 interest~\citep{brandt2024promise,lewanski2024era,nielsen2024inference,
-    wong2024general}. ARGs are a fundamental object in population genetics,
-and although they have been of theoretical interest for
-decades~\citep{Hudson1983,Griffiths1997} it is only with recent breakthroughs
-in inference methods~\citep{rasmussen2014genome,
-    speidel2019method,kelleher2019inferring,wohns2022unified,zhang2023biobank,
-    gunnarsson2024scalable,deng2024robust} that practical application has
-become possible. Varied applications have been recently proposed,
+wong2024general}.
+%Version 1
+%While early methods laid the groundwork for practical applications, 
+%it is with recent breakthroughs in inference methods ~\citep{rasmussen2014genome,
+%speidel2019method,kelleher2019inferring,wohns2022unified,zhang2023biobank,
+%gunnarsson2024scalable,deng2024robust} that scalability was achieved,
+%enabling the widespread application of ARGs to large-scale genomic data.
+%Version 2
+%ARGs are fundamental objects in population genetics,
+%with decades of foundational work informing their study and practical
+%applications~\citep{Hudson1983,Griffiths1996,Griffiths1997}.
+%~\citep{Hudson1983,Griffiths1996,Griffiths1997}.Recent breakthroughs 
+%in inference methods~\citep{rasmussen2014genome, speidel2019method, 
+%kelleher2019inferring, wohns2022unified, zhang2023biobank, 
+%gunnarsson2024scalable, deng2024robust} have enabled their 
+%widespread application to large-scale genomic data.
+%Version 3
+While decades of foundational work have informed the study of ARGs 
+and established them as fundamental objects in population genetics
+~\citep{Hudson1983,Griffiths1996,Griffiths1997}, recent breakthroughs 
+in inference methods~\citep{rasmussen2014genome, speidel2019method, 
+kelleher2019inferring, wohns2022unified, zhang2023biobank, 
+gunnarsson2024scalable, deng2024robust} have expanded their application
+to large-scale, genome-wide data.
+
+Varied applications have been proposed,
 such as inferring selection~\citep{stern2019approximate,hejase2022deep} and
 the spatial location of genetic ancestors~\citep{osmond2024estimating,deraje2024inferring,grundler2025geographic},
 more powerful approaches to quantifying genetic
@@ -133,7 +152,7 @@ studies~\citep{nowbandegani2023extremely,link2023tree},
 and the development of machine learning methods using inferred
 ARGs as input~\citep{hejase2022deep,pearson2023local,korfmann2024simultaneous,
 whitehouse2024tree}.
-While these developements are exciting, the performance 
+While these developments are exciting, the performance 
 of these new methods depends critically on the accuracy of the inferred ARGs.
 Although studies benchmarking the various inference methods on 
 simulated data have emerged 
@@ -255,9 +274,9 @@ takes an input ARG file and augments the \texttt{tskit}
 tables with additional columns,
 precomputing all the information required for visualisation,
 and storing as a compressed \texttt{.tsbrowse} file.
-(The \texttt{.tsbrowse} file is also a valid input for
-\texttt{tszip}, a general utility for compressing \texttt{tskit}
-files.)
+%(The \texttt{.tsbrowse} file is also a valid input for
+%\texttt{tszip}, a general utility for compressing \texttt{tskit}
+%files.)
 To visualise an ARG we then run \texttt{tsbrowse serve}, which
 by default will open a browser window on the local machine, but
 also supports running the server on a remote machine across the
@@ -274,11 +293,11 @@ when plotted on genome coordinate vs time axes, but at this scale
 the data density is far too high to simply plot each mutation as a point.
 We overcome this problem by using Datashader and the wider
 Holoviz ecosystem~\citep{Holoviz}, which efficiently rasterises large datasets
-at the requested resolution on the server, sends the image to the web-browser
+at the requested resolution on the server, sends the image to the web browser
 for display, and dynamically updates as the user interactively navigates the
 ARG.
 This approach allows us to summarise very large ARGs interactively;
-Fig~\ref{fig:Supplementary_Figure_4}, for example, shows a screenshot of
+Fig~\ref{fig:Supplementary_Figure_1}, for example, shows a screenshot of
 \texttt{tsbrowse} summarising the 1.9 million mutations in a SARS-CoV-2
 ARG with around 2.7 million nodes and edges.
 
@@ -295,7 +314,7 @@ ARG with around 2.7 million nodes and edges.
 % lead to performance bottlenecks and overplotting. Datashader
 % \citep{Datashader}, a component Holoviz package, overcomes this challenge by
 % rasterising huge datasets (see \hyperref[subsec:User_Interface]{User Interface}
-% for details, and Supplementary Figure \ref{fig:Supplementary_Figure_4} for a
+% for details, and Supplementary Figure \ref{fig:Supplementary_Figure_1} for a
 % tsbrowse view of SARS-Cov-2 mutations). A web browser client connects to the
 
 % \texttt{Tsbrowse} is run in a step-wise approach (Fig.~\ref{fig:Figure_1}), 
@@ -314,7 +333,7 @@ ARG with around 2.7 million nodes and edges.
 % lead to performance bottlenecks and overplotting. Datashader
 % \citep{Datashader}, a component Holoviz package, overcomes this challenge by
 % rasterising huge datasets (see \hyperref[subsec:User_Interface]{User Interface}
-% for details, and Supplementary Figure \ref{fig:Supplementary_Figure_4} for a
+% for details, and Supplementary Figure \ref{fig:Supplementary_Figure_1} for a
 % tsbrowse view of SARS-Cov-2 mutations). A web browser client connects to the
 % server to render and interact with these visualisations. Heavy data processing
 % is limited to the server side, keeping the client-side interface lightweight.
@@ -360,16 +379,17 @@ of the
 parent and child nodes on the x-axis, and the y-axis shows the time of
 either the parent or the child, as chosen by the user.
 The user can interact with the main ``genome browser'' window
-using a set of controls on the top-right corner (provided by Bokeh),
-allowing the user to pan and zoom as required. The histograms to the
+using a set of controls on the top-right corner (provided by 
+Bokeh~\citep{bokeh}),allowing them to pan and zoom as required. 
+The histograms to the
 right then summarise the edges as depicted in the browser window.
 A similar browser interface is provided for
-nodes
-(e.g. Fig~\ref{fig:Supplementary_Figure_3})
-and mutations
-(e.g. Fig~\ref{fig:Supplementary_Figure_4}).
+mutations
+(e.g. Fig~\ref{fig:Supplementary_Figure_1})
+and nodes
+(e.g. Fig~\ref{fig:Supplementary_Figure_2}).
 \texttt{Tsbrowse} also provides an interactive table viewer with flexible
-search and sorting utilities, which is a valuable debugging utility for
+searching and sorting utilities, which is a valuable debugging utility for
 developers.
 
 %The ability to explore ARG properties across the sequence and interact with the data makes the analysis of local genealogical patterns more intuitive.
@@ -382,7 +402,7 @@ using the genome-browser-like perspective provided by \texttt{tsbrowse}
 is given in the simulated ARG of Fig~\ref{fig:Figure_2}, where
 the gap in the edges view corresponds to the characteristic dip in diversity
 of a selective sweep. Comparing this ground truth to the ARGs inferred
-by four different inference methods in Fig~\ref{fig:Supplementary_Figure_1},
+by four different inference methods in Fig~\ref{fig:Supplementary_Figure_3},
 we can see that there are substantial qualitative differences between the
 results. These differences in ancestral haplotypes illustrated by
 the edges view are unlikely to be captured by the tree-by-tree distance
@@ -398,12 +418,12 @@ choices that must be made along any bioinformatics pipeline on the final
 ARG are hard to predict and quantify. \texttt{Tsbrowse} was primarily
 developed as a way to quickly visualise the effects of such filtering
 choices on ARGs inferred by \texttt{tsinfer}, and it is now an indispensable
-element of the inference pipeline. Fig~\ref{fig:Supplementary_Figure_2} 
+element of the inference pipeline. Fig~\ref{fig:Supplementary_Figure_4} 
 shows a region of the 1000G data with gaps in site density that are spanned by
  exceptionally long edges, which are likely to bias downstream statistics.
 These interactive visualisations have also helped diagnose issues with
 the \texttt{tsinfer} inference algorithm.
-Fig~\ref{fig:Supplementary_Figure_3} shows the genomic spans of
+Fig~\ref{fig:Supplementary_Figure_2} shows the genomic spans of
 ancestral nodes in an ARG inferred with \texttt{tsinfer}, demonstrating a clear
 excess of long haplotypes in the very ancient past. These insights
 have helped guide development and
@@ -418,8 +438,8 @@ may lead to significant improvements in performance.
 
 % We demonstrate a further application of tsbrowse in validating inferences
 % (Supplementary Figures 
-% \ref{fig:Supplementary_Figure_3}). Supplementary Figure
-% \ref{fig:Supplementary_Figure_2} shows how mutation patterns in a 2D plot of
+% \ref{fig:Supplementary_Figure_2}). Supplementary Figure
+% \ref{fig:Supplementary_Figure_4} shows how mutation patterns in a 2D plot of
 % genomic position and mutation age are helpful in spotting poorly inferred
 % regions. Excluding regions with low site density from the variant data improves
 % the quality of inference (Panel B). 
@@ -432,7 +452,7 @@ may lead to significant improvements in performance.
 % to this expectation. It confirms a known algorithmic artefact due to which
 % disproportionately long old ancestors are generated.
 
-% Supplementary Fig. \ref{fig:Supplementary_Figure_4}, a screenshot of the
+% Supplementary Fig. \ref{fig:Supplementary_Figure_1}, a screenshot of the
 % Mutations page for SARS-CoV-2 ARGs \citep{zhan2023towards} demonstrates
 % tsbrowse's ability to handle diverse data sources. This plot represents a total
 % of \textcolor{red}{X million} mutations from an inference of
@@ -453,7 +473,7 @@ the methods can typically only handle a few hundred nodes.
 Visualisation of large-scale tree topologies with millions of nodes
 requires much more sophisticated approaches
 to capture topological features at different scales,
-and is an active research area~\citep{wong2022dynamic,kramer2023treenome}.
+and is an active research area~\citep{hadfield2018nextstrain, wong2022dynamic,kramer2023treenome}.
 Adapting such methods, and integrating into \texttt{tsbrowse} to provide
 a local tree viewer that operates at the million-node scale
 is an important direction for future work.
@@ -517,7 +537,7 @@ sweep, a standard coalescent model (Hudson's algorithm \citep{Hudson1983}) was
 used until coalescence was achieved.
 
 \subsection{Inference of selective sweep dataset (Suppl. Fig.
-    \ref{fig:Supplementary_Figure_1})} The following software were used to infer
+    \ref{fig:Supplementary_Figure_3})} The following software were used to infer
 ARGs from the truth dataset described above: \texttt{tsinfer version 0.3.3}
 \citep{kelleher2019inferring}, \texttt{tsdate version 0.2.1}, 
 \texttt{Relate version 1.2.2} \citep{speidel2019method}, 
@@ -528,23 +548,8 @@ methods, the following parameters of inference were used: \textit{recombination
     rate = 1e-8}, \textit{mutation rate = 1e-8}, \textit{effective population size
     = 10,000}. Default values were used for all other inference parameters.
 
-\subsection{Inference of 1000 Genomes dataset (Suppl. Fig.
-\ref{fig:Supplementary_Figure_2}, Suppl. Fig.
-\ref{fig:Supplementary_Figure_3})} The 1000 Genomes dataset was downloaded from
-\texttt{\url{https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20220422_3202_phased_SNV_INDEL_SV/}}.
-The ancestral fasta sequence for chromosome 17 (GRCh38) was downloaded
-from the Ensembl database. Inference was performed with a Snakemake pipeline
-(\texttt{\url{https://github.com/benjeffery/tsinfer-snakemake/}}) using
-\texttt{tsinfer version 0.3.3} for the long arm of chromosome 17 after
-filtering out duplicate variant positions, variants with missing or low quality
-ancestral allele, singletons, n-1-tons and n-2-tons. Only bi-allelic SNPs were
-included for inference. For Suppl. Fig. \ref{fig:Supplementary_Figure_2}, 
-\texttt{tsdate version 0.2.1} was used to estimate the age of ancestral nodes
- with \textit{mutation rate = 1.29e-8}, setting all other parameters to default 
- values. 
-
 \subsection{Inference of SARS-CoV-2 ARGs}
-The ARG shown in Fig \ref{fig:Supplementary_Figure_4} was inferred with
+The ARG shown in Fig \ref{fig:Supplementary_Figure_1} was inferred with
 \texttt{sc2ts}~\citep{zhang2023biobank} using the Viridian
 dataset~\citep{hunt2024addressing}. It consists of
 2,482,157 samples
@@ -582,15 +587,53 @@ The resulting \texttt{.tsbrowse} file size was 130M.
 % -rw-r--r-- 1 jk jk 113M Mar 27 15:04 v1-beta1_2023-02-21.pp.md.il.ts.tsz
 % ```
 
-\subsection{} Code to recreate datasets and infer ARGs are available in an
+\subsection{Inference of 1000 Genomes dataset (Suppl. Fig.
+\ref{fig:Supplementary_Figure_3}, Suppl. Fig.
+\ref{fig:Supplementary_Figure_4})} The 1000 Genomes dataset was downloaded from
+\texttt{\url{https://ftp.1000genomes.ebi.ac.uk/vol1/ftp/data_collections/1000G_2504_high_coverage/working/20220422_3202_phased_SNV_INDEL_SV/}}.
+The ancestral fasta sequence for chromosome 17 (GRCh38) was downloaded
+from the Ensembl database. Inference was performed with a Snakemake pipeline
+(\texttt{\url{https://github.com/benjeffery/tsinfer-snakemake/}}) using
+\texttt{tsinfer version 0.3.3} for the long arm of chromosome 17 after
+filtering out duplicate variant positions, variants with missing or low quality
+ancestral allele, singletons, n-1-tons and n-2-tons. Only bi-allelic SNPs were
+included for inference. For Suppl. Fig. \ref{fig:Supplementary_Figure_4}, 
+\texttt{tsdate version 0.2.1} was used to estimate the age of ancestral nodes
+ with \textit{mutation rate = 1.29e-8}, setting all other parameters to default 
+ values. 
+
+\subsection{} Code to recreate datasets and infer ARGs is available in an
 accompanying repository:
 \texttt{\url{https://github.com/savitakartik/tsbrowse-paper}}.
 
 \clearpage
 \section{Supplementary Figures}
-\begin{figure}[H]
+\begin{figure}[h]
     \centering
     \includegraphics[width=0.95\linewidth]{figures/SuppFig1.png}
+    \caption{\textbf{\texttt{tsbrowse} applied to SARS-CoV-2 ARGs.}
+        A screenshot of \texttt{tsbrowse}'s depiction of
+        1,923,169 mutations in an
+        ARG inferred by \texttt{sc2ts}; see  text for details. Also shown are the
+        gene annotations along the X-axis.}
+    \label{fig:Supplementary_Figure_1}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\linewidth]{figures/SuppFig2.png}
+    \caption{\textbf{A view of the Nodes page for a 1000 Genomes inference.} A
+        screenshot of \texttt{tsbrowse}'s Nodes view for an inference of the long arm
+        of chromosome 17 from the 1000 Genomes whole-genome sequencing dataset. At the
+        top is a plot of node spans over time. The length of sequence that the nodes
+        span is shown on the X axis, and the time of nodes is shown on the Y axis. The
+        histogram at the bottom shows the distribution of node spans. }
+    \label{fig:Supplementary_Figure_2}
+\end{figure}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=0.95\linewidth]{figures/SuppFig3.png}
     \caption{\textbf{\texttt{tsbrowse} applied to inference methods}
     A screenshot of \texttt{tsbrowse}'s Edges view for tsinfer+tsdate,
 ARG-Needle, Relate and SINGER inferences of the truth dataset
@@ -599,41 +642,18 @@ SINGER, an examplar ARG from the set of output posterior ARG samples is shown.
 The X coordinate represents genomic position, each horizontal segment on the
 plot shows the genomic coordinates that the edge spans, and Y coordinate shows
 time of either the parent or child node in the edge.}
-    \label{fig:Supplementary_Figure_1}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.95\linewidth]{figures/SuppFig2.png}
-    \caption{\textbf{Identifying ARG inference problems with \texttt{tsbrowse}} 
-Screenshots of \texttt{tsbrowse}'s Mutations view (A) and Edges view (B) for a
- 600 kB region of chromosome 17 inferred from 3,202 participants from the 1000 
- Genomes Whole Genome Sequencing dataset (1000G) \citep{1000G2015, 1000GWGS}. 
- The poor performance of \texttt{tsinfer} in this variant-poor region is evidenced
-  by the long edges spanning gaps in mutation density.}
-    \label{fig:Supplementary_Figure_2}
-\end{figure}
-
-\begin{figure}
-    \centering
-    \includegraphics[width=0.95\linewidth]{figures/SuppFig3.png}
-    \caption{\textbf{A view of the Nodes page for a 1000 Genomes inference.} A
-        screenshot of \texttt{tsbrowse}'s Nodes view for an inference of the long arm
-        of chromosome 17 from the 1000 Genomes whole-genome sequencing dataset. At the
-        top is a plot of node spans over time. The length of sequence that the nodes
-        span is shown on the X axis, and the time of nodes is shown on the Y axis. The
-        histogram at the bottom shows the distribution of node spans. }
     \label{fig:Supplementary_Figure_3}
 \end{figure}
 
 \begin{figure}
     \centering
     \includegraphics[width=0.95\linewidth]{figures/SuppFig4.png}
-    \caption{\textbf{\texttt{tsbrowse} applied to SARS-CoV-2 ARGs.}
-        A screenshot of \texttt{tsbrowse}'s depiction of
-        1,923,169 mutations in an
-        ARG inferred by \texttt{sc2ts}; see  text for details. Also shown are the
-        gene annotations along the X-axis.}
+    \caption{\textbf{Identifying ARG inference problems with \texttt{tsbrowse}} 
+Screenshots of \texttt{tsbrowse}'s Mutations view (A) and Edges view (B) for a
+ 600 kB region of chromosome 17 inferred from 3,202 participants from the 1000 
+ Genomes Whole Genome Sequencing dataset (1000G) \citep{1000GWGS}. 
+ The poor performance of \texttt{tsinfer} in this variant-poor region is evidenced
+  by the long edges spanning gaps in mutation density.}
     \label{fig:Supplementary_Figure_4}
 \end{figure}
 \end{document}
