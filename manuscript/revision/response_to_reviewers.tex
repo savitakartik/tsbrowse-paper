@@ -40,7 +40,8 @@ of the approaches folks have taken for visualizing much larger trees (e.g., next
 sentence that followed the one in question "… Visualisation of large-scale tree topologies with millions of nodes 
 requires much more sophisticated approaches to capture topological features at different scales, 
 and is an active research area". Thanks for bringing Nextstrain to our 
-attention, and we have now Hadfield et al. as a citation for visualisation of medium-sized toplogies.}\\
+attention, and we have now included \href{{Wong et al 2024}}{Hadfield et al.} as a citation for visualisation of 
+medium-sized toplogies.}\\
 
 
 \textbf{Reviewer: 2}\\
@@ -53,7 +54,7 @@ tszip, a general utility for compressing tskit files.)'' Sorry, but I don't unde
 More precisely, both the compressed and the uncompressed files have the .tbrowse extension? If yes, 
 that's a weird choice and I would like to see some justification. You should also make clear if tszip 
 is a part of tskit or of twbrowse.\\
-\textcolor{blue}{To clarify, the tszip is part of the tskit ecosystem. It is not part of the tsbrowse 
+\textcolor{blue}{To clarify, tszip is part of the tskit ecosystem. It is not part of the tsbrowse 
 package but can be used to compress the tables output from the tsbrowse preprocess step. Thank you 
 for pointing out this potentially unclear statement. We have now deleted the text 
 in brackets, which we believe isn't crucial for understanding the data model.}\\
@@ -65,23 +66,23 @@ in brackets, which we believe isn't crucial for understanding the data model.}\\
 not like to refer to a Figure in the supplementary materia just as if it were in the article; if the 
 Figure is relevant, it should be in the article. If it's not relevant, that you should refer to it without
 hinting that it is important.\\
-\textcolor{blue}{We agree with the reviewer's opinion, and believe that this figure is important 
+\textcolor{blue}{We agree with your opinion, and believe that this figure is important 
 to demonstrate the application of tsbrowse to large-scale datasets (which is a key design 
-feature of the app). However, we are unable to move this figure to the main matter considering journal 
-guidelines for page limit.}\\
+feature of the app). However, given the journal guidelines for page limit, we are unable 
+to move this figure to the main matter.}\\
 
 4. Looking at the github repo, I can find the installation instruction using pip only. In my experience 
 pip is quite picky. I strongly suggest you to provide tsbrowse via conda-forge/bio-conda or a containerized 
 solution (e.g. docker).\\
-\textcolor{blue}{We have now created a Docker container in order to ensure a smooth experience across 
+\textcolor{blue}{We have now created a Docker container in order to ensure a smooth user experience across 
 computing environments. Usage instructions have been added to the app documentation.}\\
 
 \textbf{Reviewer: 3}\\
 
 Comments to the Author\\
 This paper offers a browser-based visualisation tool for ancestral recombination graphs (ARGs), which is 
-a data structure representing gene genealogies for a sample of DNA sequences. The complication in the p
-resence of recombination is that these structures are not simple trees, but - because of the possibility 
+a data structure representing gene genealogies for a sample of DNA sequences. The complication in the 
+presence of recombination is that these structures are not simple trees, but - because of the possibility 
 of recombination - graphs with reticulated nodes, which makes exploratory data analysis difficult.
 
 I agree with the authors that there is currently a lack of visualisation tools for ARGs, and I expect the 
@@ -94,8 +95,8 @@ that figure couldn't make it into the main paper, though I recognise that this j
 \textcolor{blue}{Thank you for your valuable feedback on the manuscript, and on the utility of tsbrowse!}
 
 \textcolor{blue}{We completely agree that this figure would have been a compelling main display item had the journal 
-page/figure limits allowed for it. Considering the necessity of the existing main display items in establishing 
-the fundamental aspects of tsbrowse, we have decided to retain the figure in the supplementary.}\\
+page/figure limits allowed for it. Considering the importance of the existing main display items in illustrating 
+the core aspects of tsbrowse, we have decided to retain this figure in the supplementary.}\\
 
 My main comment is that tsbrowse does not actually seem to be an ARG visualisation tool. It is a useful way 
 to visualise mutations, tree-sequence edges, and summary statistics, but nowhere will you actually see a tree 
@@ -107,16 +108,16 @@ able to draw at least the local trees? (For researchers with smaller datasets, b
 fine details of an ARG would be equally valuable as the complementary selling-points around scalability.) At 
 the very least I would like to see the manuscript at least be a little more up-front about this omission.\\
 \textcolor{blue}{This is an important observation, and we agree that drawing (parts of) local trees would be 
-a great feature. For smaller datasets, tools such as \texttt{tskit-arg-visualizer} 
-(\url{https://pypi.org/project/tskit-arg-visualizer/}) and existing tskit infrastructure, for example 
-functions \texttt{draw\_text()} and \texttt{draw\_svg()} already provide this functionality. A key 
+a great feature. For smaller datasets, tools such as 
+\href{https://pypi.org/project/tskit-arg-visualizer/}{tskit-arg-visualizer} and existing tskit infrastructure, 
+for example functions \texttt{draw\_text()} and \texttt{draw\_svg()} already provide this functionality. A key 
 motivation for this work is to guide large-scale inference, and implementing tree visualisation that is 
 interpretable at this scale would require significant thought towards design, as well as considerable effort. 
 We therefore think that implementing this feature is not feasible for this work and is better scoped as future 
-work or as a separate endeavour. In the text, we do state that tsbrowse is a visualiser for the information 
-structure in ARGs, which we hope implies that it is a visualiser for the properties of the ARG, rather than 
-the ARG topology itself. We have also already explicitly stated in the Discussion that drawing local trees is 
-an important future direction.}\\
+work or as a separate endeavour. In line with this, we have already explicitly stated in the Discussion that drawing 
+local trees is an important future direction. In the text, we do state that tsbrowse "provides visualisations of 
+the information structure of ARGs", which we hope implies that it is a visualiser for the \textit{properties} 
+of the ARG, rather than its topology itself.}\\
 
 Minor comments:\\
 
@@ -129,9 +130,9 @@ the advantage that they actually sample from the claimed model without introduci
 \textcolor{blue}{Thank you for pointing this out, and you are right that we are somewhat overstating the 
 case for recent methods. We have changed the word "practical" to "widespread", which we feel is an uncontroversial 
 statement. The history of ARG inference is a complicated and confusing subject, dealt with exhaustively by 
-Wong et al 2024, and would be impossible to accurately summarise in the available space. We note, though, 
+\href{https://academic.oup.com/genetics/article/228/1/iyae100/7714980}{Wong et al. 2024}, and would be impossible to accurately summarise in the available space. We note, though, 
 that two of the recent methods cited here (ARGweaver and SINGER) sample ARGs from the posterior defined by a 
-coalescent model in a statistically rigorous manner}\\
+coalescent model in a statistically rigorous manner.}\\
 
 Manuscript p1: Typo 'developements'.\\
 \textcolor{blue}{This is now fixed.}\\
@@ -144,7 +145,7 @@ Supplement p1, Sec 1.4: ``The ARG shown in Fig 4'' should say "The ARG shown in 
 \textcolor{blue}{This is now fixed.}\\
 
 Fig S2 caption - 'Consortium (2015)' is citing incorrectly.\\
-\textcolor{blue}{Fixed (removed this citation as it was not required)}\\
+\textcolor{blue}{Fixed (removed this citation as it was not required).}\\
 
 From the online documentation, Node page: \url{https://tskit.dev/tsbrowse/docs/stable/nodes.html}
 ``The histograms at the bottom show the distributions of node spans over different dimensions. 
@@ -169,7 +170,7 @@ option 1 will fail because Homebrew's Python environment is externally managed.)
 \textcolor{blue}{We apologise for the confusion surrounding installation notes. The recommended way to install 
 tsbrowse is via pip within a virtual environment. We have fixed the documentation so that instructions 
 to install tsbrowse as a new user are clearly stated at the beginning of the documentation,
-and separate from developer instructions.}\\
+and are separate from developer instructions.}\\
 
 Bug(?):\\
 
@@ -181,7 +182,7 @@ done, defined at \\
 /Users/reviewer/myenv/lib/python3.13/site-packages/panel/io/server.py:153> 
 exception=AbbreviatedException(, ValueError('Supplied cmap winter not found among matplotlib, bokeh, or colorcet 
 colormaps.'), )>)\\
-\textcolor{blue}{We are grateful to the reviewer for bringing this bug to our attention. 
-We have solved the issue and released an updated version of the package.}\\
+\textcolor{blue}{Thank you for bringing this bug to our attention. We have solved the issue and released an 
+updated version of the package.}\\
 
 \end{document}

@@ -86,7 +86,7 @@
 \abstract{
     %\textbf{Motivation:}
     Ancestral Recombination Graphs (ARGs) represent the interwoven paths of genetic
-    ancestry for a set of recombining sequences. The ability to capture the
+    ancestry of a set of recombining sequences. The ability to capture the
     evolutionary history of samples makes ARGs valuable in a wide range of
     applications in population and statistical genetics. ARG-based approaches are
     increasingly becoming a part of genetic data analysis pipelines due to
@@ -254,7 +254,7 @@ and \texttt{serve}. The \texttt{preprocess} command
 takes an input ARG file and augments the \texttt{tskit}
 tables with additional columns,
 precomputing all the information required for visualisation,
-and storing as a compressed \texttt{.tsbrowse} file.
+and storing it as a compressed \texttt{.tsbrowse} file.
 %(The \texttt{.tsbrowse} file is also a valid input for
 %\texttt{tszip}, a general utility for compressing \texttt{tskit}
 %files.)
@@ -324,7 +324,7 @@ ARG with around 2.7 million nodes and edges.
 
 \subsection{User Interface} \label{subsec:User_Interface} \begin{figure}
     \centering \includegraphics[width=0.95\linewidth]{figures/MainFig2.png}
-    \caption{Screenshot of the Edges tab in \texttt{tsbrowse}.
+    \caption{Screenshot of the Edges view in \texttt{tsbrowse}.
         Visualisation of the edges in a simulated ARG with a strong selective
         sweep in the middle of the genome (see Supplement for details).
         Edges are shown in the main browser pane on the left, with additional
@@ -349,20 +349,20 @@ ARG with around 2.7 million nodes and edges.
 % data. The \texttt{serve} step accepts an optional input file containing
 % sequence annotations. This allows users to overlay contextual information about
 % genes or other sequence features. 
-The user interface is presented as a dashboard, with pages to
+The user interface is presented as a dashboard, with views to
 describe various aspects of the ARG.
 Fig.~\ref{fig:Figure_2}
-demonstrates the user interface using the Edges page as an example.
+demonstrates the user interface using the Edges view as an example.
 The plot on the left is an overview of the 33,929 edges
 in a simulated ARG with a strong selective sweep (see
 Supplement for details).
-Each edge is depicted as a horizontal line connecting the genomic coordinates
+Each edge in the ARG is depicted as a horizontal line connecting the genomic coordinates
 of the
 parent and child nodes on the x-axis, and the y-axis shows the time of
 either the parent or the child, as chosen by the user.
 The user can interact with the main ``genome browser'' window
 using a set of controls on the top-right corner provided by 
-Bokeh~\citep{bokeh},allowing them to pan and zoom as required. 
+Bokeh~\citep{bokeh}, allowing them to pan and zoom as required. 
 The histograms to the
 right then summarise the edges as depicted in the browser window.
 A similar browser interface is provided for
@@ -385,13 +385,13 @@ The purpose of \texttt{tsbrowse} is to provide an interactive view of the
 control and facilitate debugging. An example of how we can deepen our understanding
 using the genome-browser-like perspective provided by \texttt{tsbrowse}
 is given in the simulated ARG of Fig.~\ref{fig:Figure_2}, where
-the gap in the edges view corresponds to the characteristic dip in diversity
+the gap in the Edges view corresponds to the characteristic dip in diversity
 of a selective sweep. Comparing this ground truth to the ARGs inferred
 %by four different inference methods in Fig~\ref{fig:Supplementary_Figure_3},
 by four different inference methods in Fig.~S3,
 we can see that there are substantial qualitative differences between the
 results. These differences in ancestral haplotypes illustrated by
-the edges view are unlikely to be captured by the tree-by-tree distance
+the Edges view are unlikely to be captured by the tree-by-tree distance
 metrics usually used to evaluate
 inference methods~\citep[e.g.][]{kelleher2019inferring,zhang2023biobank},
 providing further motivation for new and improved ways to compare
@@ -406,7 +406,7 @@ developed as a way to quickly visualise the effects of such filtering
 choices on ARGs inferred by \texttt{tsinfer}, and it is now an indispensable
 %element of the inference pipeline. Fig~\ref{fig:Supplementary_Figure_4} 
 element of the inference pipeline. Fig.~S4
-shows a region of the 1000G data with gaps in site density that are spanned by
+shows a region of the 1000 Genomes data with gaps in site density that are spanned by
  exceptionally long edges, which are likely to bias downstream statistics.
 These interactive visualisations have also helped diagnose issues with
 the \texttt{tsinfer} inference algorithm.
@@ -458,12 +458,12 @@ Visualisation of tree topology is a central task in phylogenetics,
 and although numerous tools
 exist~\citep[e.g.][]{huson2007dendroscope,vaughan2017icytree},
 the methods can typically only handle a few hundred nodes 
-(but see e.g., \citet{hadfield2018nextstrain})
+(but see e.g., \citet{hadfield2018nextstrain}).
 Visualisation of large-scale tree topologies with millions of nodes
 requires much more sophisticated approaches
 to capture topological features at different scales,
 and is an active research area~\citep{wong2022dynamic,kramer2023treenome}.
-Adapting such methods, and integrating into \texttt{tsbrowse} to provide
+Adapting such methods, and integrating them into \texttt{tsbrowse} to provide
 a local tree viewer that operates at the million-node scale
 is an important direction for future work.
 An interactive viewer for the entire ARG topology, capturing
