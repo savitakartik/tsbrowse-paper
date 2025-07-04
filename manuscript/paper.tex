@@ -53,7 +53,7 @@
 \begin{document}
 
 \journaltitle{Bioinformatics}
-\journaltitle{Preprint}
+%\journaltitle{Preprint}
 \DOI{DOI HERE}
 \copyrightyear{2025}
 % \pubyear{2019}
@@ -83,8 +83,9 @@
 \revised{Date}{0}{Year}
 \accepted{Date}{0}{Year}
 
+%Summary, Availability and Implementation, Contact, and Supplementary information
 \abstract{
-    %\textbf{Motivation:}
+    \textbf{Summary:}
     Ancestral Recombination Graphs (ARGs) represent the interwoven paths of genetic
     ancestry of a set of recombining sequences. The ability to capture the
     evolutionary history of samples makes ARGs valuable in a wide range of
@@ -92,22 +93,21 @@
     increasingly becoming a part of genetic data analysis pipelines due to
     breakthroughs enabling ARG inference at biobank-scale. However, there is a lack
     of visualisation tools, which are crucial for validating inferences and
-    generating hypotheses.
-    %\textbf{Results:} 
-    We present \texttt{tsbrowse}, an open-source Python web-app for the interactive
-    visualisation of the fundamental building-blocks of ARGs, i.e.,  nodes, edges
-    and mutations. We demonstrate the application of \texttt{tsbrowse} to various
-    data sources and scenarios, and highlight its key features of browsability
-    along the genome, user interactivity, and scalability to very large sample
-    sizes.\\ \textbf{Availability:}\\ Python package:
-    \texttt{\url{https://pypi.org/project/tsbrowse/}}, \\ Development version:
-    \texttt{\url{https://github.com/tskit-dev/tsbrowse}}, \\ Documentation:
-    \texttt{\url{https://tskit.dev/tsbrowse/docs/}}, \\ DOI: 
+    generating hypotheses. We present \texttt{tsbrowse}, an open-source,
+    web-based Python application for the interactive visualisation of the fundamental 
+    building blocks of ARGs, i.e., nodes, edges and mutations. We demonstrate the 
+    application of \texttt{tsbrowse} to various data sources and scenarios, and highlight 
+    its key features of browsability along the genome, user interactivity, and scalability 
+    to very large sample sizes.\\\textbf{Availability and Implementation:}
+    \texttt{Tsbrowse} is installed as a Python package from PyPI
+    (\texttt{\url{https://pypi.org/project/tsbrowse/}}), while a development version 
+    is maintained at \texttt{\url{https://github.com/tskit-dev/tsbrowse}}. Documentation 
+    is available at \texttt{\url{https://tskit.dev/tsbrowse/docs/}}.
+    Source code is archived on Zenodo with DOI, 
     \texttt{\url{https://doi.org/10.5281/zenodo.15683039}}\\
-    %\textbf{Contact:} \href{name@email.com}{name@email.com}\\
-    %\textbf{Supplementary information:} Available at
-    %\textit{\textcolor{red}{\href{https://www.google.com}{Bioinformatics}
-    %online}.}}
+    \textbf{Contact:} \href{savita.karthikeyan@st-hughs.ox.ac.uk}{savita.karthikeyan@st-hughs.ox.ac.uk}\\
+    \textbf{Supplementary information:} Available at
+    \textit{Bioinformatics} online.
 }
 
 \keywords{Ancestral Recombination Graph, HoloViz, data visualisation, interactive browser} \maketitle 
@@ -246,7 +246,7 @@ and mutations that encode the sequence variation (Fig.~\ref{fig:Figure_1}).
 % (see \hyperref[subsec:User_Interface]{User Interface}). 
 
 \subsection{Architecture}
-\texttt{Tsbrowse} is a modular client-server application
+\texttt{Tsbrowse} is a modular application
 written in Python, optimised for ARGs with millions
 of samples (Fig.~\ref{fig:Figure_1}).
 The application has two basic commands: \texttt{preprocess}
@@ -272,7 +272,7 @@ and interactive visual summaries of ARGs containing millions of nodes, edges
 and mutations. Mutations, for example, have a clear interpretation
 when plotted on genome coordinate vs time axes, but at this scale
 the data density is far too high to simply plot each mutation as a point.
-We overcome this problem by using Datashader and the wider
+We overcome this problem by using Datashader~\citep{Datashader} and the wider
 Holoviz ecosystem~\citep{Holoviz}, which efficiently rasterises large datasets
 at the requested resolution on the server, sends the image to the web browser
 for display, and dynamically updates as the user interactively navigates the
@@ -362,7 +362,8 @@ parent and child nodes on the x-axis, and the y-axis shows the time of
 either the parent or the child, as chosen by the user.
 The user can interact with the main ``genome browser'' window
 using a set of controls on the top-right corner provided by 
-Bokeh~\citep{bokeh}, allowing them to pan and zoom as required. 
+%Bokeh~\citep{bokeh}, allowing them to pan and zoom as required. 
+Bokeh (http://www.bokeh.pydata.org), allowing them to pan and zoom as required.
 The histograms to the
 right then summarise the edges as depicted in the browser window.
 A similar browser interface is provided for
@@ -397,9 +398,9 @@ inference methods~\citep[e.g.][]{kelleher2019inferring,zhang2023biobank},
 providing further motivation for new and improved ways to compare
 simulated and inferred ARGs~\citep{fritze2024forest}.
 
-Interest in ARG-based methods is burgeoning, but the methods are new
+Interest in ARG-based methods is burgeoning, but the methods are new,
 and practical guidance on applying inferences to real data is lacking.
-Data filtering is essential, and the effects of the
+Data filtering is essential, and the effects of the 
 choices that must be made along any bioinformatics pipeline on the final
 ARG are hard to predict and quantify. \texttt{Tsbrowse} was primarily
 developed as a way to quickly visualise the effects of such filtering
@@ -493,8 +494,8 @@ ambitious goal, and would be a major asset for the field.
 No competing interest is declared.
 
 \section*{Funding}
-SK acknowledges full support and funding from Novo Nordisk Research Centre Oxford,
-and funding from the Biotechnology and Biological Sciences Research Council 
+SK acknowledges full support and funding from Novo Nordisk Research Centre Oxford
+and the Biotechnology and Biological Sciences Research Council 
 (UKRI-BBSRC) [grant number BB/T008784/1]. DMR is funded by 
 a studentship from the Wellcome Programme in Genomic Medicine and Statistics.
 JK acknowledges EPSRC (research grant EP/X024881/1),
